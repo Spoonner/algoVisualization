@@ -1,13 +1,13 @@
 package com.spoonner.alex.datastruct;
 
-import com.spoonner.alex.appkit.appkit.frame.AbstractWindow;
+import com.spoonner.alex.appkit.core.frame.AbstractWindow;
 import com.spoonner.alex.datastruct.panels.*;
-import com.spoonner.alex.appkit.appkit.menu.XJMainMenuBar;
-import com.spoonner.alex.appkit.appkit.menu.XJMenu;
-import com.spoonner.alex.appkit.appkit.menu.XJMenuItem;
-import com.spoonner.alex.appkit.appkit.menu.XJMenuItemDelegate;
-import com.spoonner.alex.appkit.appkit.utils.XJAlert;
-import com.spoonner.alex.appkit.appkit.utils.XJFileChooser;
+import com.spoonner.alex.appkit.core.menu.MainMenuBar;
+import com.spoonner.alex.appkit.core.menu.Menu;
+import com.spoonner.alex.appkit.core.menu.MenuItem;
+import com.spoonner.alex.appkit.core.menu.MenuItemDelegate;
+import com.spoonner.alex.appkit.core.utils.XJAlert;
+import com.spoonner.alex.appkit.core.utils.XJFileChooser;
 import com.spoonner.alex.appkit.misc.XJUtils;
 
 import javax.imageio.ImageIO;
@@ -19,7 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DSWindow extends AbstractWindow implements XJMenuItemDelegate {
+public class DSWindow extends AbstractWindow implements MenuItemDelegate {
 
     protected JTabbedPane viewTabbedPane;
 
@@ -138,53 +138,53 @@ public class DSWindow extends AbstractWindow implements XJMenuItemDelegate {
     public static final int MI_ALGORITHMS_HEAPS = 206;
     public static final int MI_ALGORITHMS_HUFFMAN = 207;
 
-    public void customizeFileMenu(XJMenu menu) {
+    public void customizeFileMenu(Menu menu) {
 
-        XJMenu exportMenu = new XJMenu();
+        Menu exportMenu = new Menu();
         exportMenu.setTitle("Export");
-        exportMenu.addItem(new XJMenuItem("As EPS...", MI_EXPORT_AS_EPS, this));
-        exportMenu.addItem(new XJMenuItem("As Bitmap Image...", MI_EXPORT_AS_IMAGE, this));
+        exportMenu.addItem(new MenuItem("As EPS...", MI_EXPORT_AS_EPS, this));
+        exportMenu.addItem(new MenuItem("As Bitmap Image...", MI_EXPORT_AS_IMAGE, this));
 
-        menu.insertItemAfter(exportMenu, XJMainMenuBar.MI_CLOSE);
-        menu.insertSeparatorAfter(XJMainMenuBar.MI_CLOSE);
+        menu.insertItemAfter(exportMenu, MainMenuBar.MI_CLOSE);
+        menu.insertSeparatorAfter(MainMenuBar.MI_CLOSE);
 
-        XJMenu algorithmMenu = new XJMenu();
+        Menu algorithmMenu = new Menu();
         algorithmMenu.setTitle("Algorithms");
-        algorithmMenu.addItem(new XJMenuItem("Lists/Stacks/Queues",MI_ALGORITHMS_LIST,this));
-        algorithmMenu.addItem(new XJMenuItem("Sorting Algorithms",MI_ALGORITHMS_SORT,this));
-        algorithmMenu.addItem(new XJMenuItem("Trees (BST/AVL/B-Trees)",MI_ALGORITHMS_TREES,this));
-        algorithmMenu.addItem(new XJMenuItem("Heaps / Binomial Queues",MI_ALGORITHMS_HEAPS,this));
-        algorithmMenu.addItem(new XJMenuItem("Graph Algorithms",MI_ALGORITHMS_GRAPH,this));
-        algorithmMenu.addItem(new XJMenuItem("Hashing",MI_ALGORITHMS_HASHING,this));
-        algorithmMenu.addItem(new XJMenuItem("Huffman Coding",MI_ALGORITHMS_HUFFMAN,this));
-        algorithmMenu.addItem(new XJMenuItem("Dynamic Programming",MI_ALGORITHMS_DYNAMIC,this));
+        algorithmMenu.addItem(new MenuItem("Lists/Stacks/Queues",MI_ALGORITHMS_LIST,this));
+        algorithmMenu.addItem(new MenuItem("Sorting Algorithms",MI_ALGORITHMS_SORT,this));
+        algorithmMenu.addItem(new MenuItem("Trees (BST/AVL/B-Trees)",MI_ALGORITHMS_TREES,this));
+        algorithmMenu.addItem(new MenuItem("Heaps / Binomial Queues",MI_ALGORITHMS_HEAPS,this));
+        algorithmMenu.addItem(new MenuItem("Graph Algorithms",MI_ALGORITHMS_GRAPH,this));
+        algorithmMenu.addItem(new MenuItem("Hashing",MI_ALGORITHMS_HASHING,this));
+        algorithmMenu.addItem(new MenuItem("Huffman Coding",MI_ALGORITHMS_HUFFMAN,this));
+        algorithmMenu.addItem(new MenuItem("Dynamic Programming",MI_ALGORITHMS_DYNAMIC,this));
 
 
     }
 
-    public void customizeMenuBar(XJMainMenuBar menubar) {
-        XJMenu menu = new XJMenu();
+    public void customizeMenuBar(MainMenuBar menubar) {
+        Menu menu = new Menu();
         menu.setTitle("Algorithms");
-        menu.addItem(new XJMenuItem("Lists/Stacks/Queues", KeyEvent.VK_1,  MI_ALGORITHMS_LIST, this));
-        menu.addItem(new XJMenuItem("Sorting Algortihms", KeyEvent.VK_2,  MI_ALGORITHMS_SORT, this));
-        menu.addItem(new XJMenuItem("Trees (BST/AVL/B-Tree)", KeyEvent.VK_3,  MI_ALGORITHMS_TREES, this));
-        menu.addItem(new XJMenuItem("Heaps / Binomial Queues", KeyEvent.VK_4,  MI_ALGORITHMS_HEAPS, this));
-        menu.addItem(new XJMenuItem("Graph Algortihms", KeyEvent.VK_5,  MI_ALGORITHMS_GRAPH, this));
-        menu.addItem(new XJMenuItem("Hashing", KeyEvent.VK_6,  MI_ALGORITHMS_HASHING, this));
-        menu.addItem(new XJMenuItem("Huffman Coding", KeyEvent.VK_7,  MI_ALGORITHMS_HUFFMAN, this));
-        menu.addItem(new XJMenuItem("Dynamic Programming", KeyEvent.VK_8,  MI_ALGORITHMS_DYNAMIC, this));
+        menu.addItem(new MenuItem("Lists/Stacks/Queues", KeyEvent.VK_1,  MI_ALGORITHMS_LIST, this));
+        menu.addItem(new MenuItem("Sorting Algortihms", KeyEvent.VK_2,  MI_ALGORITHMS_SORT, this));
+        menu.addItem(new MenuItem("Trees (BST/AVL/B-Tree)", KeyEvent.VK_3,  MI_ALGORITHMS_TREES, this));
+        menu.addItem(new MenuItem("Heaps / Binomial Queues", KeyEvent.VK_4,  MI_ALGORITHMS_HEAPS, this));
+        menu.addItem(new MenuItem("Graph Algortihms", KeyEvent.VK_5,  MI_ALGORITHMS_GRAPH, this));
+        menu.addItem(new MenuItem("Hashing", KeyEvent.VK_6,  MI_ALGORITHMS_HASHING, this));
+        menu.addItem(new MenuItem("Huffman Coding", KeyEvent.VK_7,  MI_ALGORITHMS_HUFFMAN, this));
+        menu.addItem(new MenuItem("Dynamic Programming", KeyEvent.VK_8,  MI_ALGORITHMS_DYNAMIC, this));
     // This line adds a menu separator
     //menu.addSeparator();
 
         menubar.addCustomMenu(menu);
     }
 
-    public void customizeHelpMenu(XJMenu menu) {
-        menu.insertItemAfter(new XJMenuItem("Check for Updates", MI_CHECK_UPDATES, this), XJMainMenuBar.MI_HELP);
-        menu.insertSeparatorAfter(XJMainMenuBar.MI_HELP);
+    public void customizeHelpMenu(Menu menu) {
+        menu.insertItemAfter(new MenuItem("Check for Updates", MI_CHECK_UPDATES, this), MainMenuBar.MI_HELP);
+        menu.insertSeparatorAfter(MainMenuBar.MI_HELP);
     }
 
-    public void handleMenuEvent(XJMenu menu, XJMenuItem item) {
+    public void handleMenuEvent(Menu menu, MenuItem item) {
         super.handleMenuEvent(menu, item);
         switch(item.getTag()) {
             case MI_EXPORT_AS_EPS:

@@ -8,13 +8,13 @@ import java.awt.*;
 
 public class DSPanelBST extends DSPanel {
 
-    protected DSViewBST BSTView;
-    protected JTextField insertfield;
+    private DSViewBST BSTView;
+    private JTextField insertfield;
     protected JButton insertButton;
-    protected JTextField findfield;
-    protected JButton findButton;
-    protected JTextField deletefield;
-    protected JButton deleteButton;
+    private JTextField findfield;
+    private JButton findButton;
+    private JTextField deletefield;
+    private JButton deleteButton;
 
     public DSPanelBST(DSWindow window) {
         super(window);

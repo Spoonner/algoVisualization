@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct.views;
 
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -18,7 +18,7 @@ public class DSViewBST extends DSView {
     protected int widthdelta = 50;
     protected int heightdelta = 50;
     protected final int MOVESTEPS = 40;
-    GElement elementLabel;
+    Element elementLabel;
 
 
     public DSViewBST() {
@@ -78,7 +78,7 @@ public class DSViewBST extends DSView {
                 }
                 treeroot.left = insertElem;
                 insertElem.parent = treeroot;
-                createLink(treeroot.display, insertElem.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+                createLink(treeroot.display, insertElem.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
                 resizetree();
 
             } else {
@@ -97,7 +97,7 @@ public class DSViewBST extends DSView {
                 }
                 treeroot.right = insertElem;
                 insertElem.parent = treeroot;
-                createLink(treeroot.display, insertElem.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+                createLink(treeroot.display, insertElem.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
                 resizetree();
             } else {
                 insert(insertElem, treeroot.right);
@@ -207,7 +207,7 @@ public class DSViewBST extends DSView {
 
 
     public void delete(String removeitem) {
-        GElement Deletelabel = createLabel("Deleting:", 100, 40, false);
+        Element Deletelabel = createLabel("Deleting:", 100, 40, false);
         elementLabel = createLabel(String.valueOf(removeitem), 170, 40, false);
         elementLabel.setLabelColor(Color.RED);
         delete(removeitem, root);
@@ -244,9 +244,9 @@ public class DSViewBST extends DSView {
                     if (tree.parent != null) {
                         removeLink(tree.parent.display, tree.display);
                         if (leftchild) {
-                            createLink(tree.parent.display, tree.right.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+                            createLink(tree.parent.display, tree.right.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
                         } else {
-                            createLink(tree.parent.display, tree.right.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+                            createLink(tree.parent.display, tree.right.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
                         }
                         repaintwait();
                         if (leftchild) {
@@ -270,9 +270,9 @@ public class DSViewBST extends DSView {
                     if (tree.parent != null) {
                         removeLink(tree.parent.display, tree.display);
                         if (leftchild) {
-                            createLink(tree.parent.display, tree.left.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+                            createLink(tree.parent.display, tree.left.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
                         } else {
-                            createLink(tree.parent.display, tree.left.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+                            createLink(tree.parent.display, tree.left.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
                         }
                         repaintwait();
                         if (leftchild) {
@@ -306,7 +306,7 @@ public class DSViewBST extends DSView {
                     }
                     tree.display.setLabel("");
                     elementLabel.setLabelColor(Color.BLACK);
-                    GElement label = createLabel(tmp.display.getLabel(),tmp.display.getPositionX(),tmp.display.getPositionY(),false);
+                    Element label = createLabel(tmp.display.getLabel(),tmp.display.getPositionX(),tmp.display.getPositionY(),false);
                     Vector2D path[] = createPath(label.getPosition(),tree.display.getPosition(),MOVESTEPS);
                     for (int i=0; i<MOVESTEPS; i++) {
                         label.setPosition(path[i]);
@@ -342,10 +342,10 @@ public class DSViewBST extends DSView {
 
 
     public void find(String finditem) {
-        GElement findlabel = createLabel("Finding:", 100, 40, false);
+        Element findlabel = createLabel("Finding:", 100, 40, false);
         elementLabel = createLabel(String.valueOf(finditem), 170, 40, false);
         elementLabel.setLabelColor(Color.RED);
-        GElement found = find(finditem, root);
+        Element found = find(finditem, root);
         if (found != null) {
             findlabel.setLabel("Found:");
             repaintwait();
@@ -361,7 +361,7 @@ public class DSViewBST extends DSView {
 
     }
 
-    public GElement find(String finditem, BSTNode tree) {
+    public Element find(String finditem, BSTNode tree) {
         if (tree == null)
             return null;
         tree.display.setLabelColor(Color.RED);
@@ -388,7 +388,7 @@ public class DSViewBST extends DSView {
         BSTNode left;
         BSTNode right;
         BSTNode parent;
-        GElement display;
+        Element display;
         int leftwidth;
         int rightwidth;
         int newX;
@@ -403,7 +403,7 @@ public class DSViewBST extends DSView {
             newY = -1;
         }
 
-        public BSTNode(String elem, GElement disp) {
+        public BSTNode(String elem, Element disp) {
             data = elem;
             left = null;
             right = null;

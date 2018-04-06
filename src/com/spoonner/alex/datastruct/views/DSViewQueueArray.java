@@ -1,10 +1,10 @@
 package com.spoonner.alex.datastruct.views;
 
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 
 import java.awt.*;
 
@@ -17,11 +17,11 @@ public class DSViewQueueArray extends DSView {
     protected int head;
     protected int tail;
     protected String queue[];
-    protected GElementArrow headarrow;
-        protected GElementArrow tailarrow;
-    protected GElementLabel headlabel;
-    protected GElementLabel taillabel;
-    protected GElementLabel index[];
+    protected ElementArrow headarrow;
+        protected ElementArrow tailarrow;
+    protected ElementLabel headlabel;
+    protected ElementLabel taillabel;
+    protected ElementLabel index[];
     public final int queuesize = 18;
     public final int NUMSTEPS = 40;
 
@@ -30,7 +30,7 @@ public class DSViewQueueArray extends DSView {
 
         int i;
 
-        index = new GElementLabel[queuesize];
+        index = new ElementLabel[queuesize];
         waitscalefactor /= 2;
         queue = new String[queuesize];
         for (i = 0; i < queuesize; i++) {
@@ -54,18 +54,18 @@ public class DSViewQueueArray extends DSView {
               DSShapeSingleLLR r1 = createSingleLinkedListRect("A", 200, 300, 100, 50);
               DSShapeSingleLLR r2 = createSingleLinkedListRect("B", 350, 300, 100, 50);
 
-              GLink l = createLink(r1, r2, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "A-B", 0);
+              Link l = createLink(r1, r2, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "A-B", 0);
               l.setSourceOffset(30, 0);
               l.setTargetOffset(-30, 0);
 
               DSShapeDoubleLLR r3 = createDoubleLinkedListRect("C", 200, 400, 100, 50);
               DSShapeDoubleLLR r4 = createDoubleLinkedListRect("D", 350, 400, 100, 50);
 
-              l = createLink(r3, r4, GLink.SHAPE_ARC, GElement.ANCHOR_RIGHT, GElement.ANCHOR_LEFT, "C-D", 0);
+              l = createLink(r3, r4, Link.SHAPE_ARC, Element.ANCHOR_RIGHT, Element.ANCHOR_LEFT, "C-D", 0);
               l.setSourceOffset(-20, -10);
               l.setTargetOffset(20, -10);
 
-              l = createLink(r4, r3, GLink.SHAPE_ARC, GElement.ANCHOR_LEFT, GElement.ANCHOR_RIGHT, "D-C", 0);
+              l = createLink(r4, r3, Link.SHAPE_ARC, Element.ANCHOR_LEFT, Element.ANCHOR_RIGHT, "D-C", 0);
               l.setSourceOffset(20, 10);
               l.setTargetOffset(-20, 10);  */
     }
@@ -94,17 +94,17 @@ public class DSViewQueueArray extends DSView {
 
     public void enqueue(String value) {
 
-        GElement Enqueuedlabel = createLabel("Enqueueing: ", 100, 40, false);
-        GElement Enqueued = null;
+        Element Enqueuedlabel = createLabel("Enqueueing: ", 100, 40, false);
+        Element Enqueued = null;
         int i;
 
 
         if (tail + 1 % queuesize != head) {
             Enqueued = createLabel(value,-10,-10,false);
-            GElement lst[] = {Enqueuedlabel ,Enqueued };
+            Element lst[] = {Enqueuedlabel ,Enqueued };
             LineupHorizontal(lst);
             queue[tail] = value;
-            GElement arraynode = (GElement) shapes.get(tail);
+            Element arraynode = (Element) shapes.get(tail);
             tail = (tail + 1) % queuesize;
             Vector2D path[] = createPath(Enqueued.getPosition(), arraynode.getPosition(),NUMSTEPS);
             repaintwait();
@@ -144,13 +144,13 @@ public class DSViewQueueArray extends DSView {
 
     public void dequeue() {
 
-        GElement Dequeuelabel = createLabel("Dequeueing: ", 100, 40, false);
-        GElement Dequeued = null;
+        Element Dequeuelabel = createLabel("Dequeueing: ", 100, 40, false);
+        Element Dequeued = null;
         int i;
 
 
         if (head != tail) {
-            GElement arraynode = (GElement) shapes.get(head);
+            Element arraynode = (Element) shapes.get(head);
             Dequeued = createLabel(arraynode.getLabel(),arraynode.getPositionX(),arraynode.getPositionY(),false);
             Vector2D path[] = createPath(Dequeued.getPosition(),new Vector2D(165,40),NUMSTEPS);
             arraynode.setLabel("");
@@ -158,7 +158,7 @@ public class DSViewQueueArray extends DSView {
                 Dequeued.setPosition(path[i]);
                 repaintwaitmin();
             }
-            GElement lst[] = {Dequeuelabel, Dequeued};
+            Element lst[] = {Dequeuelabel, Dequeued};
             LineupHorizontal(lst);
             repaintwait();
             head = (head + 1) % queuesize;

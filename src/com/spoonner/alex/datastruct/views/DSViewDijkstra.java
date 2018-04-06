@@ -1,10 +1,10 @@
 package com.spoonner.alex.datastruct.views;
 
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 
 import java.awt.*;
 
@@ -37,10 +37,10 @@ public class DSViewDijkstra extends DSViewGraph {
     protected int PathBoxWidth = PATH_BOX_WIDTH_SMALL;
     protected int BoxHeight = BOX_HEIGHT_SMALL;
 
-    protected GElement[] VertexBox;
-    protected GElement[] KnownBox;
-    protected GElement[] CostBox;
-    protected GElement[] PathBox;
+    protected Element[] VertexBox;
+    protected Element[] KnownBox;
+    protected Element[] CostBox;
+    protected Element[] PathBox;
     protected int Dcost[];
 
     public final static int DIJKSTRA = 5;
@@ -117,10 +117,10 @@ public class DSViewDijkstra extends DSViewGraph {
         int i, j;
         int next;
 
-        VertexBox = new GElement[size + 1];
-        KnownBox = new GElement[size + 1];
-        CostBox = new GElement[size + 1];
-        PathBox = new GElement[size + 1];
+        VertexBox = new Element[size + 1];
+        KnownBox = new Element[size + 1];
+        CostBox = new Element[size + 1];
+        PathBox = new Element[size + 1];
         Dcost = new int[size];
 
 
@@ -131,14 +131,14 @@ public class DSViewDijkstra extends DSViewGraph {
         for (i = 0; i < size; i++) {
             next = getNext();
             if (next == -1) break;
-            GElementArrow arrow = createArrow(StartTableX-20,StartTableY + (next + 1) * BoxHeight,StartTableX,StartTableY + (next + 1) * BoxHeight,10,false);
+            ElementArrow arrow = createArrow(StartTableX-20,StartTableY + (next + 1) * BoxHeight,StartTableX,StartTableY + (next + 1) * BoxHeight,10,false);
             KnownBox[next].setLabel("true");
             setVertexColor(next, Color.RED);
             repaintwait();
             for (j = 0; j < size; j++) {
 
                 if (cost[next][j] < Integer.MAX_VALUE) {
-                    GElementLabel l;
+                    ElementLabel l;
 
                     CostBox[j].setLabelColor(Color.RED);
                     CostBox[next].setLabelColor(Color.RED);
@@ -174,9 +174,9 @@ public class DSViewDijkstra extends DSViewGraph {
         }
 
 
-        GElementLabel paths[] = new GElementLabel[size];
-        GElementArrow arrow = createArrow(StartTableX-20,StartTableY + (0) * BoxHeight,StartTableX,StartTableY + (0) * BoxHeight,10,false);
-        GElementLabel tmp;
+        ElementLabel paths[] = new ElementLabel[size];
+        ElementArrow arrow = createArrow(StartTableX-20,StartTableY + (0) * BoxHeight,StartTableX,StartTableY + (0) * BoxHeight,10,false);
+        ElementLabel tmp;
         for (i=0; i<size; i++) {
             paths[i] = createLabel("Path: ",-10,-10);
             LineupHorizontal(new Vector2D(StartTableX + VertexBoxWidth + KnownBoxWidth + CostBoxWidth + PathBoxWidth+15,

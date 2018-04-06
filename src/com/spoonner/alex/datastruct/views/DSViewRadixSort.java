@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct.views;
 
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
 import com.spoonner.alex.datastruct.shapes.DSShapeColoredLabel;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
 
 import java.awt.*;
 
@@ -14,16 +14,16 @@ public class DSViewRadixSort extends DSView {
 
     protected int ArrayData[];
     protected DSShapeColoredLabel ArrayElements[];
-    protected GElement ArrayFrame[];
-    protected GElement ArrayIndex[];
+    protected Element ArrayFrame[];
+    protected Element ArrayIndex[];
 
     protected int BData[];
     protected DSShapeColoredLabel BElements[];
-    protected GElement BFrame[];
-    protected GElement BIndex[];
+    protected Element BFrame[];
+    protected Element BIndex[];
 
-    protected GElement TempFrame[];
-    protected GElement TempIndex[];
+    protected Element TempFrame[];
+    protected Element TempIndex[];
     protected int TempData[];
 
 
@@ -73,17 +73,17 @@ public class DSViewRadixSort extends DSView {
         int i;
         ArrayData = new int[SIZE];
          ArrayElements = new DSShapeColoredLabel[SIZE];
-         ArrayIndex = new GElement[SIZE];
-         ArrayFrame = new GElement[SIZE];
+         ArrayIndex = new Element[SIZE];
+         ArrayFrame = new Element[SIZE];
 
-         TempIndex = new GElement[SIZE];
-         TempFrame = new GElement[SIZE];
+         TempIndex = new Element[SIZE];
+         TempFrame = new Element[SIZE];
          TempData = new int[SIZE];
 
          BData = new int[BSIZE];
          BElements = new DSShapeColoredLabel[BSIZE];
-         BIndex = new GElement[BSIZE];
-         BFrame = new GElement[BSIZE];
+         BIndex = new Element[BSIZE];
+         BFrame = new Element[BSIZE];
 
 
          Xpos = new int[SIZE];
@@ -135,8 +135,8 @@ public class DSViewRadixSort extends DSView {
     void CountingSort(int digit) {
         int Bindex;
         int TmpIndex;
-        GElementArrow emphasizeArray = createArrow(Xpos[0], Ypos[0] + BOXSIZE/2+55, Xpos[0], Ypos[0]+ BOXSIZE/2+25, 10);
-        GElementArrow emphasizeB = createArrow(XposB[0] - 20, YposB[0] + BOXSIZE/2+55, XposB[0] - 20, YposB[0] + BOXSIZE/2+25, 10);
+        ElementArrow emphasizeArray = createArrow(Xpos[0], Ypos[0] + BOXSIZE/2+55, Xpos[0], Ypos[0]+ BOXSIZE/2+25, 10);
+        ElementArrow emphasizeB = createArrow(XposB[0] - 20, YposB[0] + BOXSIZE/2+55, XposB[0] - 20, YposB[0] + BOXSIZE/2+25, 10);
         int i, j;
         Vector2D[] path;
 
@@ -198,7 +198,7 @@ public class DSViewRadixSort extends DSView {
 
 
         emphasizeArray = createArrow(Xpos[SIZE-1], Ypos[0] - (BOXSIZE/2+35), Xpos[SIZE-1], Ypos[0] - (BOXSIZE/2+5), 10);
-        GElementArrow emphasizeTemp = createArrow(XposTemp[0],YposTemp[0]+BOXSIZE/2+55,XposTemp[0],YposTemp[0]+BOXSIZE/2+25,10);
+        ElementArrow emphasizeTemp = createArrow(XposTemp[0],YposTemp[0]+BOXSIZE/2+55,XposTemp[0],YposTemp[0]+BOXSIZE/2+25,10);
         for (i = SIZE - 1; i >= 0; i--) {
             path = createPath(emphasizeArray.getPosition(), new Vector2D(Xpos[i], Ypos[i] - (BOXSIZE/2+35)));
             for (j = 0; j < path.length; j++) {

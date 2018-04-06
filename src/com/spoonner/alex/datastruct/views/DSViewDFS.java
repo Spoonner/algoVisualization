@@ -1,10 +1,10 @@
 package com.spoonner.alex.datastruct.views;
 
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -34,13 +34,13 @@ public class DSViewDFS extends DSViewGraphDirected {
     int parent[] = new int[30];
 
 
-    private GElementLabel dLabels[] = new GElementLabel[30];
-    private GElementLabel fLabels[] = new GElementLabel[30];
+    private ElementLabel dLabels[] = new ElementLabel[30];
+    private ElementLabel fLabels[] = new ElementLabel[30];
 
     private final int WHITE = 0;
     private final int GREY = 1;
     private final int BLACK = 2;
-    private GElement DFSLabels[] = new GElement[50];
+    private Element DFSLabels[] = new Element[50];
 
 
     public final static int DFS = 8;
@@ -52,7 +52,7 @@ public class DSViewDFS extends DSViewGraphDirected {
     protected boolean DFScompleted=false;
 
 
-    protected GElement HighlightCircle;
+    protected Element HighlightCircle;
 
     private int yoffset = 0;
 
@@ -399,7 +399,7 @@ public class DSViewDFS extends DSViewGraphDirected {
                                removeAny(edges[startvertex][i]);
                                 int flat = flatness[startvertex][i];
                                 if (flat ==0) flat = -flatness[i][startvertex];
-                               edges[startvertex][i] = createLink(nodes[startvertex],nodes[i], GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+                               edges[startvertex][i] = createLink(nodes[startvertex],nodes[i], Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                                                      "", flat);
                                setEdgeColor(startvertex,i,Color.BLUE);
                                 edges[i][startvertex] = edges[startvertex][i];
@@ -424,7 +424,7 @@ public class DSViewDFS extends DSViewGraphDirected {
                                 repaintwait();
                             }
                         } else {
-                            GElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
+                            ElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
                                                           DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
                             repaintwait();
                             removeAny(l);
@@ -448,7 +448,7 @@ public class DSViewDFS extends DSViewGraphDirected {
                         setVertexColor(startvertex, Color.RED);
                         repaintwait();
                     } else {
-                        GElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
+                        ElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
                                                       DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
                         repaintwait();
                         removeAny(l);

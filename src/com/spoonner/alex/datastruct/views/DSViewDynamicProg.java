@@ -3,10 +3,10 @@ package com.spoonner.alex.datastruct.views;
 
 import java.awt.*;
 
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 import com.spoonner.alex.datastruct.shapes.DSShapeRect;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
 
 
 public class DSViewDynamicProg extends DSView {
@@ -32,8 +32,8 @@ public class DSViewDynamicProg extends DSView {
     private static int YDIFF = 14;
 
 
-    protected GElementLabel[] code = new GElementLabel[10];
-    protected GElement Labels[] = new GElement[200];
+    protected ElementLabel[] code = new ElementLabel[10];
+    protected Element Labels[] = new Element[200];
     protected int labelindex = 0;
 
 
@@ -137,7 +137,7 @@ public class DSViewDynamicProg extends DSView {
         int i;
 
         DSShapeRect TableL[] = new DSShapeRect[n+1];
-        GElementLabel indicies[] = new GElementLabel[n+1];
+        ElementLabel indicies[] = new ElementLabel[n+1];
         long Table[] = new long[n+1];
         setupTables(TableL, indicies, Table, n);
         Labels[labelindex++] = createLabel("fibonacci("+n+") = ",
@@ -159,7 +159,7 @@ public class DSViewDynamicProg extends DSView {
 
     }
 
-    protected void setupTables(DSShapeRect TableL[], GElementLabel indicies[], long Table[], int n) {
+    protected void setupTables(DSShapeRect TableL[], ElementLabel indicies[], long Table[], int n) {
         int i;
 
         for (i=0; i<=n; i++) {
@@ -181,7 +181,7 @@ public class DSViewDynamicProg extends DSView {
 
 
         DSShapeRect TableL[] = new DSShapeRect[n+1];
-        GElementLabel indicies[] = new GElementLabel[n+1];
+        ElementLabel indicies[] = new ElementLabel[n+1];
         long Table[] = new long[n+1];
         setupTables(TableL, indicies, Table, n);
         int i;
@@ -202,7 +202,7 @@ public class DSViewDynamicProg extends DSView {
             TableL[i].setLabel(Long.toString(Table[i]));
             repaintwait();
         }
-        GElementLabel result = createLabel(Long.toString(Table[n]), TableX[n], TableY[n], false);
+        ElementLabel result = createLabel(Long.toString(Table[n]), TableX[n], TableY[n], false);
         Labels[labelindex++] = result;
         while(result.getFrame().r.width == 0)
             repaintwaitmin(1);
@@ -217,7 +217,7 @@ public class DSViewDynamicProg extends DSView {
 
     }
 
-    protected long fib_recursive_m(int n, int xoffset, int yoffset,DSShapeRect TableL[], GElementLabel indicies[], long Table[]) {
+    protected long fib_recursive_m(int n, int xoffset, int yoffset, DSShapeRect TableL[], ElementLabel indicies[], long Table[]) {
             code[0].setLabelColor(Color.RED);
             Labels[labelindex++] = createLabel("fibonacci("+n+")",xoffset*XDIFF+XSTART,yoffset*YDIFF+YSTART, false);
             indicies[n].setLabelColor(Color.RED);
@@ -227,7 +227,7 @@ public class DSViewDynamicProg extends DSView {
         TableL[n].setColor(Color.BLACK);
         code[0].setLabelColor(Color.BLACK);
             if (Table[n] > 0) {
-                GElementLabel moveLabel = createLabel(TableL[n].getLabel(), TableL[n].getPosition(), false);
+                ElementLabel moveLabel = createLabel(TableL[n].getLabel(), TableL[n].getPosition(), false);
                 AnimatePath(moveLabel,moveLabel.getPosition(),Labels[labelindex-1].getPosition(),20);
                 removeAny(moveLabel);
                 Labels[labelindex-1].setLabel(Long.toString(Table[n]));
@@ -249,7 +249,7 @@ public class DSViewDynamicProg extends DSView {
                 Labels[labelindex++] = createLabel("1",xoffset*XDIFF+XSTART,yoffset*YDIFF+YSTART, false);
                 repaintwait();
                 code[2].setLabelColor(Color.BLACK);
-                GElementLabel moveLabel = createLabel("1",Labels[labelindex-1].getPosition(), false);
+                ElementLabel moveLabel = createLabel("1",Labels[labelindex-1].getPosition(), false);
                 AnimatePath(moveLabel,moveLabel.getPosition(),TableL[n].getPosition(),20);
                 TableL[n].setLabel("1");
                 removeAny(moveLabel);
@@ -273,7 +273,7 @@ public class DSViewDynamicProg extends DSView {
                 removeAny(Labels[--labelindex]);
                 Labels[labelindex-1].setLabel(Long.toString(prev+prevprev));
                 code[6].setLabelColor(Color.BLACK);
-                GElementLabel moveLabel = createLabel(Long.toString(prev+prevprev),Labels[labelindex-1].getPosition(), false);
+                ElementLabel moveLabel = createLabel(Long.toString(prev+prevprev),Labels[labelindex-1].getPosition(), false);
                 AnimatePath(moveLabel,moveLabel.getPosition(),TableL[n].getPosition(),20);
                 Table[n] = prev+prevprev;
                 TableL[n].setLabel(moveLabel.getLabel());

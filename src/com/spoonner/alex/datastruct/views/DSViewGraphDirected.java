@@ -3,9 +3,9 @@ package com.spoonner.alex.datastruct.views;
 import com.spoonner.alex.datastruct.shapes.DSShapeLink;
 import com.spoonner.alex.datastruct.shapes.DSShapeNullPointer;
 import com.spoonner.alex.datastruct.shapes.DSShapeSingleLL2R;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -80,9 +80,9 @@ public class DSViewGraphDirected extends DSView {
 
     protected DSShapeSingleLL2R list[][];
     protected DSShapeNullPointer listH[];
-    protected GElement index[];
+    protected Element index[];
 
-    protected GElement nodes[];
+    protected Element nodes[];
     protected DSShapeLink edges[][];
     protected int cost[][];
     protected int Xpos[];
@@ -92,9 +92,9 @@ public class DSViewGraphDirected extends DSView {
     protected int edgeFlattness [][];
     protected int flatness[][];
     protected int listLength[];
-    protected GElementLabel listindex[];
-    protected GElement matrix[][];
-    protected GElementLabel matrixindex[][];
+    protected ElementLabel listindex[];
+    protected Element matrix[][];
+    protected ElementLabel matrixindex[][];
 
     protected int incompatable[][][];
 
@@ -197,7 +197,7 @@ public class DSViewGraphDirected extends DSView {
                                      {{6, 10}, {7, 9}}, {{7, 11}, {8, 10}}};
 
 
-        nodes = new GElement[size];
+        nodes = new Element[size];
         edges = new DSShapeLink[size][];
         cost = new int[size][];
         for (i = 0; i < size; i++) {
@@ -205,13 +205,13 @@ public class DSViewGraphDirected extends DSView {
             cost[i] = new int[size];
         }
         listLength = new int[size];
-        listindex = new GElementLabel[size];
+        listindex = new ElementLabel[size];
 
-        matrix = new GElement[size][];
-        matrixindex = new GElementLabel[size][];
+        matrix = new Element[size][];
+        matrixindex = new ElementLabel[size][];
         for (i = 0; i < size; i++) {
-            matrix[i] = new GElement[size];
-            matrixindex[i] = new GElementLabel[2];
+            matrix[i] = new Element[size];
+            matrixindex[i] = new ElementLabel[2];
         }
 
         randomize();
@@ -274,7 +274,7 @@ public class DSViewGraphDirected extends DSView {
                                      {{8, 15}, {11, 12}}, {{9, 16}, {12, 13}}, {{0, 2}, {1, 3}}, {{14, 16}, {15, 17}}};
 
 
-        nodes = new GElement[size];
+        nodes = new Element[size];
         edges = new DSShapeLink[size][];
         cost = new int[size][];
         for (i = 0; i < size; i++) {
@@ -282,13 +282,13 @@ public class DSViewGraphDirected extends DSView {
             cost[i] = new int[size];
         }
         listLength = new int[size];
-        listindex = new GElementLabel[size];
+        listindex = new ElementLabel[size];
 
-        matrix = new GElement[size][];
-        matrixindex = new GElementLabel[size][];
+        matrix = new Element[size][];
+        matrixindex = new ElementLabel[size][];
         for (i = 0; i < size; i++) {
-            matrix[i] = new GElement[size];
-            matrixindex[i] = new GElementLabel[2];
+            matrix[i] = new Element[size];
+            matrixindex[i] = new ElementLabel[2];
         }
 
         randomize();
@@ -415,7 +415,7 @@ public class DSViewGraphDirected extends DSView {
                         if (flat == 0)
                             flat = -flatness[j][i];
                         if (edges[i][j] == null) {
-                            edges[i][j] = createLink(nodes[i], nodes[j], GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+                            edges[i][j] = createLink(nodes[i], nodes[j], Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                                                      "", flat);
                             edges[j][i] = edges[i][j];
                             edges[i][j].setArrowVisible(false);
@@ -433,7 +433,7 @@ public class DSViewGraphDirected extends DSView {
                                 flat = -flatness[j][i];
 
                         }
-                        edges[i][j] = createLink(nodes[i], nodes[j], GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+                        edges[i][j] = createLink(nodes[i], nodes[j], Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                                                  "", flat);
                     }
 
@@ -661,7 +661,7 @@ public class DSViewGraphDirected extends DSView {
                 listH[i].setNull(false);
                 list[i][listLength[i]] = createSingleLinkedListRec2R(String.valueOf(j), String.valueOf(cost[i][j]), XposL[listLength[i]], YposL[i], elem_width, elem_height);//    list[i][j] = createSingleLinkedListRec2R()
                 list[i][listLength[i]].setPointerVoid(true);
-                GLink l = createLink(listH[i], list[i][listLength[i]], GLink.SHAPE_ARC, GElement.ANCHOR_RIGHT, GElement.ANCHOR_LEFT, "", 0);
+                Link l = createLink(listH[i], list[i][listLength[i]], Link.SHAPE_ARC, Element.ANCHOR_RIGHT, Element.ANCHOR_LEFT, "", 0);
                 l.setSourceOffset(-elem_height / 2, 0);
                 list[i][listLength[i]].setLabelColor(Color.BLUE);
                 EdgesL[i][j] = list[i][listLength[i]];
@@ -679,7 +679,7 @@ public class DSViewGraphDirected extends DSView {
                 if (j < size) {
                     list[i][listLength[i]] = createSingleLinkedListRec2R(String.valueOf(j), String.valueOf(cost[i][j]), XposL[listLength[i]], YposL[i], elem_width, elem_height);//    list[i][j] = createSingleLinkedListRec2R()
                     list[i][listLength[i]].setPointerVoid(true);
-                    GLink l = createLink(list[i][listLength[i] - 1], list[i][listLength[i]], GLink.SHAPE_ARC, GElement.ANCHOR_RIGHT, GElement.ANCHOR_LEFT, "", 0);
+                    Link l = createLink(list[i][listLength[i] - 1], list[i][listLength[i]], Link.SHAPE_ARC, Element.ANCHOR_RIGHT, Element.ANCHOR_LEFT, "", 0);
                     l.setSourceOffset(-elem_width * .25 * .5, 0);
                     list[i][listLength[i] - 1].setPointerVoid(false);
                     list[i][listLength[i]].setLabelColor(Color.BLUE);

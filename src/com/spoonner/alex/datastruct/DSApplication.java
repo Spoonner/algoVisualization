@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct;
 
-import com.spoonner.alex.appkit.appkit.app.Application;
-import com.spoonner.alex.appkit.appkit.app.XJApplicationDelegate;
-import com.spoonner.alex.appkit.appkit.document.DataXML;
-import com.spoonner.alex.appkit.appkit.utils.XJLocalizable;
+import com.spoonner.alex.appkit.core.app.Application;
+import com.spoonner.alex.appkit.core.app.XJApplicationDelegate;
+import com.spoonner.alex.appkit.core.document.DataXML;
+import com.spoonner.alex.appkit.core.utils.XJLocalizable;
 
 import javax.swing.*;
 

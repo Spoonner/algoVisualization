@@ -1,8 +1,8 @@
 package com.spoonner.alex.datastruct.views;
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 
 import java.awt.*;
 
@@ -32,21 +32,21 @@ public class DSViewTopological extends DSViewGraphDirected {
     int parent[] = new int[30];
 
 
-    private GElement IndegreLabels[] = new GElementLabel[LARGESIZE];
-    private GElement IndegreeBoxes[] = new GElement[LARGESIZE];
-    private GElementLabel TopologicalOrder[] = new GElementLabel[LARGESIZE];
+    private Element IndegreLabels[] = new ElementLabel[LARGESIZE];
+    private Element IndegreeBoxes[] = new Element[LARGESIZE];
+    private ElementLabel TopologicalOrder[] = new ElementLabel[LARGESIZE];
     private int numTopological = 0;
-    private GElementLabel dLabels[] = new GElementLabel[30];
-    private GElementLabel fLabels[] = new GElementLabel[30];
+    private ElementLabel dLabels[] = new ElementLabel[30];
+    private ElementLabel fLabels[] = new ElementLabel[30];
     private int indegree[];
-    private GElement indegreeGraphic[];
+    private Element indegreeGraphic[];
 
 
 
     private final int WHITE = 0;
     private final int GREY = 1;
     private final int BLACK = 2;
-    private GElement DFSLabels[] = new GElement[LARGESIZE*4];
+    private Element DFSLabels[] = new Element[LARGESIZE*4];
 
 
     public final static int TOPOLOGICAL_INDEGREE = 8;
@@ -70,7 +70,7 @@ public class DSViewTopological extends DSViewGraphDirected {
         DAG = true;
         randomize();
         indegree = new int[LARGESIZE];
-        indegreeGraphic = new GElement[LARGESIZE];
+        indegreeGraphic = new Element[LARGESIZE];
         dXpos = new int[]{550, 700, 850, 505, 655, 900, 510, 655, 900, 550, 700, 850};
         dYpos = new int[]{16, 16, 16, 161, 161, 161, 291, 291, 291, 438, 438, 438};
 
@@ -129,8 +129,8 @@ public class DSViewTopological extends DSViewGraphDirected {
     private void TopologicalIndegree() {
         int i,j;
 
-        GElementLabel indicies[] = new GElementLabel[size];
-        GElementLabel stackGraphic[] = new GElementLabel[size];
+        ElementLabel indicies[] = new ElementLabel[size];
+        ElementLabel stackGraphic[] = new ElementLabel[size];
         int stack[] = new int[size];
 
         int stacktop = 0;
@@ -145,7 +145,7 @@ public class DSViewTopological extends DSViewGraphDirected {
             DFSLabels[labelindex++] = indegreeGraphic[i];
             DFSLabels[labelindex] = createLabel(Integer.toString(i) ,INDEGREE_XPOS-INDEGREE_WIDTH/2-10,INDEGREE_YSTART+i*INDEGREE_HEIGHT);
             DFSLabels[labelindex].setLabelColor(Color.BLUE);
-            indicies[i] = (GElementLabel) DFSLabels[labelindex];
+            indicies[i] = (ElementLabel) DFSLabels[labelindex];
             labelindex++;
         }
         for (i=0;i<size;i++) {
@@ -189,7 +189,7 @@ public class DSViewTopological extends DSViewGraphDirected {
         for(i=0;i<size;i++) {
             stacktop--;
             int vertex = stack[stacktop];
-            GElement top = stackGraphic[stacktop];
+            Element top = stackGraphic[stacktop];
             top.setLabelColor(Color.RED);
             repaintwait();
             AnimatePath(stackGraphic[stacktop],stackGraphic[stacktop].getPosition(),
@@ -483,7 +483,7 @@ public class DSViewTopological extends DSViewGraphDirected {
                         setVertexColor(startvertex, Color.RED);
                         repaintwait();
                     } else {
-                        GElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
+                        ElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
                                                       DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
                         repaintwait();
                         removeAny(l);

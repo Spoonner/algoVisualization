@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct.views;
 
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -17,9 +17,9 @@ public class DSViewHeapSort extends DSView {
     protected int size;
     protected int Xpos[];
     protected int Ypos[];
-    GElement HeapArray[];
-    GElement HeapTree[];
-    GElement ArrayIndex[];
+    Element HeapArray[];
+    Element HeapTree[];
+    Element ArrayIndex[];
 
 
 
@@ -57,7 +57,7 @@ public class DSViewHeapSort extends DSView {
     public DSViewHeapSort() {
         // super(contained);
         HeapData = new int[31];
-        ArrayIndex = new GElement[31];
+        ArrayIndex = new Element[31];
         size = 0;
         int i;
         sleeptime = 100;
@@ -69,9 +69,9 @@ public class DSViewHeapSort extends DSView {
 
         // Create a tree (the root element will be the first node added into this view)
 
-  //       GElement t = createRectangle("", 50, 50, 25, 25, false);
-        HeapArray = new GElement[31];
-        HeapTree = new GElement[31];
+  //       Element t = createRectangle("", 50, 50, 25, 25, false);
+        HeapArray = new Element[31];
+        HeapTree = new Element[31];
         for (i = 0; i < 31; i++)  {
             HeapData[i] = (int) (Math.random()*100);
             HeapArray[i] = createRectangle(String.valueOf(HeapData[i]), i * 25 + 75, 50, 25, 25, false);
@@ -88,8 +88,8 @@ public class DSViewHeapSort extends DSView {
 
 
     private void setLabel(int index, String label) {
-    //    GElement treenode = (GElement) shapes.get(index + 32);
-    //    GElement arraynode = (GElement) shapes.get(index + 1);
+    //    Element treenode = (Element) shapes.get(index + 32);
+    //    Element arraynode = (Element) shapes.get(index + 1);
     //    treenode.setLabel(label);
     //    arraynode.setLabel(label);
         HeapTree[index].setLabel(label);
@@ -98,8 +98,8 @@ public class DSViewHeapSort extends DSView {
     }
 
     private void setColor(int index, Color clr) {
- //       GElement treenode = (GElement) shapes.get(index + 32);
-//        GElement arraynode = (GElement) shapes.get(index + 1);
+ //       Element treenode = (Element) shapes.get(index + 32);
+//        Element arraynode = (Element) shapes.get(index + 1);
  //       treenode.setLabelColor(clr);
  //       arraynode.setLabelColor(clr);
 
@@ -123,9 +123,9 @@ public class DSViewHeapSort extends DSView {
         setLabel(size, String.valueOf(HeapData[size]));
         if (size != 0) {
             if (size % 2 == 0) {
-                createLink((size - 1) / 2 + 32, size + 32, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 15);
+                createLink((size - 1) / 2 + 32, size + 32, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 15);
             } else {
-                createLink((size - 1) / 2 + 32, size + 32, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -15);
+                createLink((size - 1) / 2 + 32, size + 32, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -15);
             }
         }
         repaintwait();
@@ -220,10 +220,10 @@ public class DSViewHeapSort extends DSView {
         setLabel(index2, "");
 
 
-        GElement ArrayLabel1 = createLabel(Label1, array1.getX(), array1.getY(), false);
-        GElement ArrayLabel2 = createLabel(Label2, array2.getX(), array2.getY(), false);
-        GElement TreeLabel1 = createLabel(Label1, tree1.getX(), tree1.getY(), false);
-        GElement TreeLabel2 = createLabel(Label2, tree2.getX(), tree2.getY(), false);
+        Element ArrayLabel1 = createLabel(Label1, array1.getX(), array1.getY(), false);
+        Element ArrayLabel2 = createLabel(Label2, array2.getX(), array2.getY(), false);
+        Element TreeLabel1 = createLabel(Label1, tree1.getX(), tree1.getY(), false);
+        Element TreeLabel2 = createLabel(Label2, tree2.getX(), tree2.getY(), false);
 
         for (i = 0; i < pathlength; i++) {
             TreeLabel1.setPosition(treepath1[i]);
@@ -297,9 +297,9 @@ public class DSViewHeapSort extends DSView {
             setLabel(i, String.valueOf(HeapData[i]));
             if (i != 0) {
                 if (i % 2 == 0) {
-                    createLink(HeapTree[(i-1)/2],HeapTree[i], GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 15);
+                    createLink(HeapTree[(i-1)/2],HeapTree[i], Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 15);
                 } else {
-                    createLink(HeapTree[(i-1)/2],HeapTree[i], GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -15);
+                    createLink(HeapTree[(i-1)/2],HeapTree[i], Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -15);
                 }
             }
         }

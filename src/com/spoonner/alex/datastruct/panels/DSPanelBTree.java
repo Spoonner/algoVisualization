@@ -8,13 +8,13 @@ import java.awt.*;
 
 public class DSPanelBTree extends DSPanel {
 
-    protected DSViewBTree BTreeView;
-    protected JTextField insertfield;
+    private DSViewBTree BTreeView;
+    private JTextField insertfield;
     protected JButton insertButton;
-    protected JTextField findfield;
-    protected JButton findButton;
-    protected JTextField deletefield;
-    protected JButton deleteButton;
+    private JTextField findfield;
+    private JButton findButton;
+    private JTextField deletefield;
+    private JButton deleteButton;
 
     public DSPanelBTree (DSWindow window) {
         super(window);

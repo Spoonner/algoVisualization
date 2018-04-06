@@ -1,19 +1,19 @@
 package com.spoonner.alex.datastruct.shapes;
 
 
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 import com.spoonner.alex.appkit.misc.XMLSerializable;
 
 import java.awt.*;
 
-public class DSShapeLink extends GLink implements XMLSerializable {
-    public DSShapeLink(GElement source, String sourceAnchorKey, GElement target, String targetAnchorKey, int shape, String pattern, Point mouse, double flateness) {
+public class DSShapeLink extends Link implements XMLSerializable {
+    public DSShapeLink(Element source, String sourceAnchorKey, Element target, String targetAnchorKey, int shape, String pattern, Point mouse, double flateness) {
            super(source,sourceAnchorKey,target,targetAnchorKey,shape,pattern,mouse,flateness);
 
        }
 
-       public DSShapeLink(GElement source, String sourceAnchorKey, GElement target, String targetAnchorKey, int shape, String pattern, double flateness) {
+       public DSShapeLink(Element source, String sourceAnchorKey, Element target, String targetAnchorKey, int shape, String pattern, double flateness) {
       super(source,sourceAnchorKey,target,targetAnchorKey,shape,pattern,flateness);
        }
 

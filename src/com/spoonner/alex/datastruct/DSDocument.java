@@ -1,8 +1,8 @@
 package com.spoonner.alex.datastruct;
 
 
-import com.spoonner.alex.appkit.appkit.document.DataXML;
-import com.spoonner.alex.appkit.appkit.document.Document;
+import com.spoonner.alex.appkit.core.document.DataXML;
+import com.spoonner.alex.appkit.core.document.Document;
 
 public class DSDocument extends Document {
 

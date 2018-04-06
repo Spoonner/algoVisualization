@@ -2,10 +2,10 @@ package com.spoonner.alex.datastruct.views;
 
 import com.spoonner.alex.datastruct.shapes.DSShapeNullPointer;
 import com.spoonner.alex.datastruct.shapes.DSShapeSingleLLU;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -32,10 +32,10 @@ public class DSViewBucketSort extends DSView {
     protected final int BUCKETSIZE = 3;
 
     protected BucketElem BList[];
-    protected GElementLabel Bindex[];
-    protected GElementLabel index[];
+    protected ElementLabel Bindex[];
+    protected ElementLabel index[];
     protected DSShapeNullPointer Bframe[];
-    protected GElement list[];
+    protected Element list[];
     protected int data[];
     protected int Xpos[];
     protected int BXpos[];
@@ -54,12 +54,12 @@ public class DSViewBucketSort extends DSView {
         Xpos = new int[SIZE];
         BXpos = new int[BSIZE];
         BList = new BucketElem[BSIZE];
-        index = new GElementLabel[SIZE];
-        Bindex = new GElementLabel[BSIZE];
+        index = new ElementLabel[SIZE];
+        Bindex = new ElementLabel[BSIZE];
         Bframe = new DSShapeNullPointer[BSIZE];
-        list = new GElement[SIZE];
+        list = new Element[SIZE];
         data = new int[SIZE];
-        index = new GElementLabel[SIZE];
+        index = new ElementLabel[SIZE];
 
 
         for (i = 0; i < BSIZE; i++) {
@@ -114,7 +114,7 @@ public class DSViewBucketSort extends DSView {
 
         DSShapeSingleLLU newelem = createSingleLinkedListRectU("", Xpos[arrayindex], 100, ELEMWIDTH, ELEMHEIGHT);
         newelem.setPointerVoid(true);
-        GElementLabel nextval = createLabel(String.valueOf(data), Xpos[arrayindex], Ypos, false);
+        ElementLabel nextval = createLabel(String.valueOf(data), Xpos[arrayindex], Ypos, false);
         list[arrayindex].setLabel("");
         Vector2D path[] = createPath(nextval.getPosition(), newelem.getPosition(), NUMSTEPS/2);
 
@@ -135,7 +135,7 @@ public class DSViewBucketSort extends DSView {
 
         if (BList[index] == null) {
             BList[index] = new BucketElem(newelem);
-            GLink l2 = createLink(Bframe[index], newelem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+            Link l2 = createLink(Bframe[index], newelem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
             l2.setSourceOffset(0, ARRAYELEMHEIGHT / 2);
             Bframe[index].setNull(false);
             newelem.setLabelColor(Color.BLACK);
@@ -152,9 +152,9 @@ public class DSViewBucketSort extends DSView {
             newelem.setLabelColor(Color.BLACK);
 
             removeLink(Bframe[index], BList[index].elem);
-            GLink l2 = createLink(Bframe[index], newelem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+            Link l2 = createLink(Bframe[index], newelem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
             l2.setSourceOffset(0, ARRAYELEMHEIGHT / 2);
-            l2 = createLink(newelem, BList[index].elem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+            l2 = createLink(newelem, BList[index].elem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
             l2.setSourceOffset(0, ELEMHEIGHT * newelem.getpercentLink() / 2);
             BList[index] = new BucketElem(newelem, BList[index]);
             newelem.setPointerVoid(false);
@@ -167,14 +167,14 @@ public class DSViewBucketSort extends DSView {
         newelem.setLabelColor(Color.BLACK);
         if (tmp.next != null) {
             removeLink(tmp.elem, tmp.next.elem);
-            GLink l2 = createLink(newelem, tmp.next.elem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+            Link l2 = createLink(newelem, tmp.next.elem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
             l2.setSourceOffset(0, ELEMHEIGHT * newelem.getpercentLink() / 2);
             newelem.setPointerVoid(false);
         } else {
             tmp.elem.setPointerVoid(false);
             newelem.setPointerVoid(true);
         }
-        GLink l2 = createLink(tmp.elem, newelem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+        Link l2 = createLink(tmp.elem, newelem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
         l2.setSourceOffset(0, ELEMHEIGHT * newelem.getpercentLink() / 2);
         tmp.next = new BucketElem(newelem, tmp.next);
 
@@ -204,7 +204,7 @@ public class DSViewBucketSort extends DSView {
 
         dataindex = 0;
         for (i = 0; i < BSIZE; i++) {
-            GElementLabel value;
+            ElementLabel value;
             while (BList[i] != null) {
                 value = createLabel(BList[i].elem.getLabel(), BList[i].elem.getPositionX(),
                                     BList[i].elem.getPositionY(), false);
@@ -220,7 +220,7 @@ public class DSViewBucketSort extends DSView {
                 removeLink(Bframe[i], BList[i].elem);
                 if (BList[i].next != null) {
                     removeLink(BList[i].elem, BList[i].next.elem);
-                    GLink l2 = createLink(Bframe[i], BList[i].next.elem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+                    Link l2 = createLink(Bframe[i], BList[i].next.elem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
                     l2.setSourceOffset(0, ARRAYELEMHEIGHT / 2);
                 }
                 removeAny(BList[i].elem);

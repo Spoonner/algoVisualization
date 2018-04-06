@@ -1,10 +1,10 @@
 package com.spoonner.alex.datastruct.views;
 
 
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 import com.spoonner.alex.datastruct.shapes.DSShapeColoredLabel;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
 
 import java.awt.*;
 
@@ -26,8 +26,8 @@ public class DSViewHash extends DSView {
 
     protected boolean HashingIntegers = true;
 
-    protected GElementLabel elemLabel;
-    protected GElementLabel elemIndexLabel;
+    protected ElementLabel elemLabel;
+    protected ElementLabel elemIndexLabel;
 
     public DSViewHash() {
 
@@ -99,22 +99,22 @@ public class DSViewHash extends DSView {
         hashval = insertval;
 
 
-        GElement l1 = createLabel("Inserting ", -10, -10);
+        Element l1 = createLabel("Inserting ", -10, -10);
         elemLabel = createLabel(insertstring, -10, -10);
 
-        GElement lineup[] = {l1, elemLabel};
+        Element lineup[] = {l1, elemLabel};
         LineupHorizontal(new Vector2D(20, 10), lineup);
 
 
         repaintwait();
 
 
-        GElementLabel glab = createLabel("hash(" + insertval + ") = " + insertval + " % " + HASHSIZE + " = ",
+        ElementLabel glab = createLabel("hash(" + insertval + ") = " + insertval + " % " + HASHSIZE + " = ",
                                          -10, -10);
         elemIndexLabel = createLabel(String.valueOf(insertindex), -10, -10);
 
 
-        GElement lineup2[] = {glab, elemIndexLabel};
+        Element lineup2[] = {glab, elemIndexLabel};
         LineupHorizontal(new Vector2D(20, 30), lineup2);
 
 
@@ -131,19 +131,19 @@ public class DSViewHash extends DSView {
 
     protected void insert(String insertval) {
 
-        GElement l1 = createLabel("Inserting: ", -10, -10);
+        Element l1 = createLabel("Inserting: ", -10, -10);
         elemLabel = createLabel(insertval, -10, -10);
 
-        GElement lineup[] = {l1, elemLabel};
+        Element lineup[] = {l1, elemLabel};
         LineupHorizontal(new Vector2D(20, 10), lineup);
 
 
         repaintwait();
 
-        GElementLabel glab = createLabel("hash(" + insertval + ") = ",
+        ElementLabel glab = createLabel("hash(" + insertval + ") = ",
                                          -10, -10);
 
-        GElement lineup2[] = {glab};
+        Element lineup2[] = {glab};
         LineupHorizontal(new Vector2D(20, 30), lineup2);
 
 
@@ -153,7 +153,7 @@ public class DSViewHash extends DSView {
 
         elemIndexLabel = createLabel(String.valueOf(insertindex), 50 + 4 * (insertval.length() + 9) + 2 * String.valueOf(insertindex).length(), 30);
 
-        GElement lineup3[] = {glab, elemIndexLabel};
+        Element lineup3[] = {glab, elemIndexLabel};
 
         LineupHorizontal(lineup3);
 
@@ -180,21 +180,21 @@ public class DSViewHash extends DSView {
 
         hashval = deleteval;
 
-        GElement l1 = createLabel("Deleting ", -10, -10);
+        Element l1 = createLabel("Deleting ", -10, -10);
         elemLabel = createLabel(deletestring, -10, -10);
 
-        GElement lineup[] = {l1, elemLabel};
+        Element lineup[] = {l1, elemLabel};
         LineupHorizontal(new Vector2D(20, 10), lineup);
 
 
         repaintwait();
 
 
-        GElementLabel glab = createLabel("hash(" + deleteval + ") = " + deleteval + " % " + HASHSIZE + " = ",
+        ElementLabel glab = createLabel("hash(" + deleteval + ") = " + deleteval + " % " + HASHSIZE + " = ",
                                          -10, -10);
         elemIndexLabel = createLabel(String.valueOf(deleteindex), -10, -10);
 
-        GElement lineup2[] = {glab, elemIndexLabel};
+        Element lineup2[] = {glab, elemIndexLabel};
         LineupHorizontal(new Vector2D(20, 30), lineup2);
 
 
@@ -216,19 +216,19 @@ public class DSViewHash extends DSView {
     }
 
     protected void delete(String insertval) {
-        GElement l1 = createLabel("Deleting: ", -10, -10);
+        Element l1 = createLabel("Deleting: ", -10, -10);
         elemLabel = createLabel(insertval, -10, -10);
 
-        GElement lineup[] = {l1, elemLabel};
+        Element lineup[] = {l1, elemLabel};
         LineupHorizontal(new Vector2D(20, 10), lineup);
 
 
         repaintwait();
 
-        GElementLabel glab = createLabel("hash(" + insertval + ") = ",
+        ElementLabel glab = createLabel("hash(" + insertval + ") = ",
                                          -10, -10);
 
-        GElement lineup2[] = {glab};
+        Element lineup2[] = {glab};
         LineupHorizontal(new Vector2D(20, 30), lineup2);
 
 
@@ -238,7 +238,7 @@ public class DSViewHash extends DSView {
 
         elemIndexLabel = createLabel(String.valueOf(insertindex), 50 + 4 * (insertval.length() + 9) + 2 * String.valueOf(insertindex).length(), 30);
 
-        GElement lineup3[] = {glab, elemIndexLabel};
+        Element lineup3[] = {glab, elemIndexLabel};
 
         LineupHorizontal(lineup3);
 
@@ -269,18 +269,18 @@ public class DSViewHash extends DSView {
 
         hashval = insertval;
 
-        GElement l1 = createLabel("finding ", -10, -10);
+        Element l1 = createLabel("finding ", -10, -10);
         elemLabel = createLabel(insertstring, -10, -10);
-        GElement lineup[] = {l1, elemLabel};
+        Element lineup[] = {l1, elemLabel};
         LineupHorizontal(new Vector2D(20, 10), lineup);
 
         repaintwait();
 
 
-        GElementLabel glab = createLabel("hash(" + insertval + ") = " + insertval + " % " + HASHSIZE + " = ",
+        ElementLabel glab = createLabel("hash(" + insertval + ") = " + insertval + " % " + HASHSIZE + " = ",
                                          -10, -10);
         elemIndexLabel = createLabel(String.valueOf(insertindex), -10, 10);
-        GElement lineup2[] = {glab, elemIndexLabel};
+        Element lineup2[] = {glab, elemIndexLabel};
         LineupHorizontal(new Vector2D(20, 30), lineup2);
 
         repaintwait();
@@ -310,19 +310,19 @@ public class DSViewHash extends DSView {
 
 
     protected void find(String insertval) {
-        GElement l1 = createLabel("Finding: ", -10, -10);
+        Element l1 = createLabel("Finding: ", -10, -10);
         elemLabel = createLabel(insertval, -10, -10);
 
-        GElement lineup[] = {l1, elemLabel};
+        Element lineup[] = {l1, elemLabel};
         LineupHorizontal(new Vector2D(20, 10), lineup);
 
 
         repaintwait();
 
-        GElementLabel glab = createLabel("hash(" + insertval + ") = ",
+        ElementLabel glab = createLabel("hash(" + insertval + ") = ",
                                          -10, -10);
 
-        GElement lineup2[] = {glab};
+        Element lineup2[] = {glab};
         LineupHorizontal(new Vector2D(20, 30), lineup2);
 
 
@@ -332,7 +332,7 @@ public class DSViewHash extends DSView {
 
         elemIndexLabel = createLabel(String.valueOf(insertindex), 50 + 4 * (insertval.length() + 9) + 2 * String.valueOf(insertindex).length(), 30);
 
-        GElement lineup3[] = {glab, elemIndexLabel};
+        Element lineup3[] = {glab, elemIndexLabel};
 
         LineupHorizontal(lineup3);
 
@@ -350,7 +350,7 @@ public class DSViewHash extends DSView {
     }
 
 
-    long getInteger(GElementLabel result[]) {
+    long getInteger(ElementLabel result[]) {
         long intval = 0;
         int i;
         for (i = 0; i < 32; i++) {
@@ -364,18 +364,18 @@ public class DSViewHash extends DSView {
         int i, j, k;
 
         DSShapeColoredLabel Key = createColoredLabel(key, 400, 20);
-        GElementLabel result[] = new GElementLabel[32];
-        GElementLabel NextChar[] = new GElementLabel[8];
-        GElementLabel Extra4[] = new GElementLabel[4];
+        ElementLabel result[] = new ElementLabel[32];
+        ElementLabel NextChar[] = new ElementLabel[8];
+        ElementLabel Extra4[] = new ElementLabel[4];
         Vector2D[] path[] = new Vector2D[32][];
-        GElement plus = createLabel("+", 625, 60);
+        Element plus = createLabel("+", 625, 60);
         plus.setLabelVisible(false);
-        GElement XOR = createLabel("XOR", 635, 80);
+        Element XOR = createLabel("XOR", 635, 80);
         XOR.setLabelVisible(false);
-        GElement tmp[] = new GElement[32];
-        GElement tmp2;
+        Element tmp[] = new Element[32];
+        Element tmp2;
 
-        //GElementLabel
+        //ElementLabel
 
 
 
@@ -526,15 +526,15 @@ public class DSViewHash extends DSView {
         }
 
         hashval = getInteger(result);
-        GElementLabel HVal = createLabel(String.valueOf(hashval), 620 - 5 * String.valueOf(hashval).length(), 60);
+        ElementLabel HVal = createLabel(String.valueOf(hashval), 620 - 5 * String.valueOf(hashval).length(), 60);
 
         for (i = 0; i < 32; i++)
             removeAny(result[i]);
         repaintwait();
 
-        GElementLabel percent = createLabel(" % "+HASHSIZE +" = ", -10, -10);
-        GElementLabel finalval = createLabel(String.valueOf(hashval % tableSize), -10, -10);
-        GElement lineup[] = {HVal, percent, finalval};
+        ElementLabel percent = createLabel(" % "+HASHSIZE +" = ", -10, -10);
+        ElementLabel finalval = createLabel(String.valueOf(hashval % tableSize), -10, -10);
+        Element lineup[] = {HVal, percent, finalval};
         LineupHorizontal(lineup);
 
 

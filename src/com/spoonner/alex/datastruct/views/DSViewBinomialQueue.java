@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct.views;
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -40,7 +40,7 @@ public class DSViewBinomialQueue extends DSView {
     protected int widthdelta = 60;
     protected int heightdelta = 50;
     protected final int MOVESTEPS = 40;
-    protected GElement elementLabel;
+    protected Element elementLabel;
 
 
     protected int viewingType = VIEW_LOGICAL;
@@ -70,8 +70,8 @@ public class DSViewBinomialQueue extends DSView {
     private void removeSmallest() {
         if (root == null)
             return;
-        GElement Deletelabel = createLabel("Element Removed:", 100, 40, false);
-        GElement DeleteValLabel;
+        Element Deletelabel = createLabel("Element Removed:", 100, 40, false);
+        Element DeleteValLabel;
         BinomialNode tmp;
         BinomialNode prev = null;
         BinomialNode smallest = root;
@@ -169,7 +169,7 @@ public class DSViewBinomialQueue extends DSView {
 
     private void insert(String insertElem) {
 
-        GElementLabel insertLabel = createLabel("Inserting:",INSERT_X, INSERT_Y);
+        ElementLabel insertLabel = createLabel("Inserting:",INSERT_X, INSERT_Y);
 
         if (root == null) {
             root = new BinomialNode(insertElem, createCircle(String.valueOf(insertElem), INSERT_X + 50, INSERT_Y), 0);
@@ -210,7 +210,7 @@ public class DSViewBinomialQueue extends DSView {
 
     private void merge() {
         int i;
-        GElement MergeLabel = null;
+        Element MergeLabel = null;
         int leftsize = SetNewPositions(root, STARTING_X, 0);
         SetNewPositions(root2, leftsize+NODE_WIDTH, 0);
         SetPaths(root, NUM_STEPS);
@@ -223,7 +223,7 @@ public class DSViewBinomialQueue extends DSView {
             }
 
         MergeLabel = createLabel("Merging Lists:",500,20,false);
-        GElement divide  = createRectangle("",leftsize,MERGE_DIVIDE_YPOS ,2,MERGE_DIVIDE_HEIGHT );
+        Element divide  = createRectangle("",leftsize,MERGE_DIVIDE_YPOS ,2,MERGE_DIVIDE_HEIGHT );
         divide.setColor(Color.BLUE);
         repaintwait();
         removeAny(divide);
@@ -270,7 +270,7 @@ public class DSViewBinomialQueue extends DSView {
             removeAny(tree.leftchildGraphic);
 
             if (tree.parent != null) {
-                tree.parentGraphic = createLink(tree.parent.display, tree.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+                tree.parentGraphic = createLink(tree.parent.display, tree.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
             }
 
             resetEdgeDisplaysLogical(tree.leftchild);
@@ -287,15 +287,15 @@ public class DSViewBinomialQueue extends DSView {
             if (tree.degreelabel != null)
                 tree.degreelabel.setLabel(Integer.toString(tree.degree));
             if (tree.rightsibling != null) {
-                tree.rightsiblingGraphic = createLink(tree.display, tree.rightsibling.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+                tree.rightsiblingGraphic = createLink(tree.display, tree.rightsibling.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
             }
 
             if (tree.parent != null) {
-                tree.parentGraphic = createLink(tree.display, tree.parent.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -10);
+                tree.parentGraphic = createLink(tree.display, tree.parent.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -10);
             }
 
             if (tree.leftchild != null) {
-                tree.leftchildGraphic = createLink(tree.display, tree.leftchild.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -10);
+                tree.leftchildGraphic = createLink(tree.display, tree.leftchild.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -10);
             }
             resetEdgeDisplaysInternal(tree.leftchild);
             resetEdgeDisplaysInternal(tree.rightsibling);
@@ -453,12 +453,12 @@ public class DSViewBinomialQueue extends DSView {
         BinomialNode leftchild;
         BinomialNode rightsibling;
         BinomialNode parent;
-        GElement display;
-        GElement parentGraphic;
-        GElement leftchildGraphic;
-        GElement rightsiblingGraphic;
+        Element display;
+        Element parentGraphic;
+        Element leftchildGraphic;
+        Element rightsiblingGraphic;
         int degree;
-        GElementLabel degreelabel;
+        ElementLabel degreelabel;
 
         int newX;
         int newY;
@@ -473,7 +473,7 @@ public class DSViewBinomialQueue extends DSView {
             newY = -1;
         }
 
-        public BinomialNode(String elem, GElement disp, int deg) {
+        public BinomialNode(String elem, Element disp, int deg) {
             data = elem;
             leftchild = null;
             rightsibling = null;

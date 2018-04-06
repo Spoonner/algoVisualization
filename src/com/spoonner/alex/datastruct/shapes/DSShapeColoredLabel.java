@@ -1,14 +1,14 @@
 package com.spoonner.alex.datastruct.shapes;
 
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.shape.SLabel;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.shape.LabelShape;
 import com.spoonner.alex.appkit.misc.XMLSerializable;
 
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 
-public class DSShapeColoredLabel extends GElementLabel implements XMLSerializable {
+public class DSShapeColoredLabel extends ElementLabel implements XMLSerializable {
 
     protected Color[] ColorIndex;
     protected double offsets[] = null;
@@ -67,7 +67,7 @@ public class DSShapeColoredLabel extends GElementLabel implements XMLSerializabl
                 while (i < ColorIndex.length) {
                     g.setColor(ColorIndex[i]);
                     for (j=i+1; j<ColorIndex.length && ColorIndex[j] == ColorIndex[i]; j++);
-                    SLabel.drawCenteredString(getLabel().substring(i,j), (int) (getPositionX() + (offsets[i]+offsets[j-1])/2), (int) getPositionY(), g);
+                    LabelShape.drawCenteredString(getLabel().substring(i,j), (int) (getPositionX() + (offsets[i]+offsets[j-1])/2), (int) getPositionY(), g);
                     i = j;
                 }
                 g.setColor(labelColor);

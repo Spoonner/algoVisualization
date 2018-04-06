@@ -1,10 +1,10 @@
 package com.spoonner.alex.datastruct.views;
 
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 
 import java.awt.*;
 
@@ -18,11 +18,11 @@ public class DSViewStackArray extends DSView {
 
     protected int stacktop;
     protected String stack[];
-    protected GElementArrow toparrow;
-    protected GElementLabel toplabel;
+    protected ElementArrow toparrow;
+    protected ElementLabel toplabel;
     public final int stacksize = 18;
     public final int NUMSTEPS = 40;
-    protected GElementLabel index[];
+    protected ElementLabel index[];
 
 
     protected void CallFunction(int function) {
@@ -50,7 +50,7 @@ public class DSViewStackArray extends DSView {
         waitscalefactor /= 2;
 
         stack = new String[stacksize];
-        index = new GElementLabel[stacksize];
+        index = new ElementLabel[stacksize];
         for (i = 0; i < stacksize; i++) {
             createRectangle("", i * 50 + 50, 150, 50, 50, false);
             index[i] = createLabel(String.valueOf(i),i*50+50,187);
@@ -69,18 +69,18 @@ public class DSViewStackArray extends DSView {
               DSShapeSingleLLR r1 = createSingleLinkedListRect("A", 200, 300, 100, 50);
               DSShapeSingleLLR r2 = createSingleLinkedListRect("B", 350, 300, 100, 50);
 
-              GLink l = createLink(r1, r2, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "A-B", 0);
+              Link l = createLink(r1, r2, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "A-B", 0);
               l.setSourceOffset(30, 0);
               l.setTargetOffset(-30, 0);
 
               DSShapeDoubleLLR r3 = createDoubleLinkedListRect("C", 200, 400, 100, 50);
               DSShapeDoubleLLR r4 = createDoubleLinkedListRect("D", 350, 400, 100, 50);
 
-              l = createLink(r3, r4, GLink.SHAPE_ARC, GElement.ANCHOR_RIGHT, GElement.ANCHOR_LEFT, "C-D", 0);
+              l = createLink(r3, r4, Link.SHAPE_ARC, Element.ANCHOR_RIGHT, Element.ANCHOR_LEFT, "C-D", 0);
               l.setSourceOffset(-20, -10);
               l.setTargetOffset(20, -10);
 
-              l = createLink(r4, r3, GLink.SHAPE_ARC, GElement.ANCHOR_LEFT, GElement.ANCHOR_RIGHT, "D-C", 0);
+              l = createLink(r4, r3, Link.SHAPE_ARC, Element.ANCHOR_LEFT, Element.ANCHOR_RIGHT, "D-C", 0);
               l.setSourceOffset(20, 10);
               l.setTargetOffset(-20, 10);  */
     }
@@ -88,19 +88,19 @@ public class DSViewStackArray extends DSView {
 
     public void push(String value) {
 
-        GElement Pushlabel = createLabel("Pushing: ", 100, 40, false);
-        GElement Pushed = null;
+        Element Pushlabel = createLabel("Pushing: ", 100, 40, false);
+        Element Pushed = null;
         int i;
 
 
         if (stacktop < stacksize) {
             Pushed = createLabel(value, -10, -10, false);
-            GElement lst[] = {Pushlabel, Pushed};
+            Element lst[] = {Pushlabel, Pushed};
             LineupHorizontal(lst);
 
             stack[stacktop++] = value;
 
-            GElement arraynode = (GElement) shapes.get(stacktop - 1);
+            Element arraynode = (Element) shapes.get(stacktop - 1);
 
 
             Vector2D path[] = createPath(Pushed.getPosition(), arraynode.getPosition(), NUMSTEPS);
@@ -135,14 +135,14 @@ public class DSViewStackArray extends DSView {
 
     public void pop() {
 
-        GElement Poplabel = createLabel("Popping: ", 100, 40, false);
-        GElement Popped = null;
+        Element Poplabel = createLabel("Popping: ", 100, 40, false);
+        Element Popped = null;
         int i;
 
 
         if (stacktop > 0) {
             stacktop = stacktop - 1;
-            GElement arraynode = (GElement) shapes.get(stacktop);
+            Element arraynode = (Element) shapes.get(stacktop);
             Popped = createLabel(arraynode.getLabel(), arraynode.getPositionX(), arraynode.getPositionY(), false);
             arraynode.setLabel("");
             Vector2D path[] = createPath(Popped.getPosition(), new Vector2D(150, 40), NUMSTEPS);
@@ -158,7 +158,7 @@ public class DSViewStackArray extends DSView {
                 Popped.setPosition(path[i]);
                 repaintwaitmin();
             }
-            GElement lst[] = {Poplabel,Popped};
+            Element lst[] = {Poplabel,Popped};
             LineupHorizontal(lst);
             repaintwait();
         } else {

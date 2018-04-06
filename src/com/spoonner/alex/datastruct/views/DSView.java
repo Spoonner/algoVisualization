@@ -1,14 +1,13 @@
 package com.spoonner.alex.datastruct.views;
 
 
-import com.spoonner.alex.appkit.appkit.gview.View;
+import com.spoonner.alex.appkit.core.gview.View;
+import com.spoonner.alex.appkit.core.gview.object.*;
 import com.spoonner.alex.datastruct.shapes.*;
 import com.spoonner.alex.datastruct.utils.DSAction;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
 
 import java.util.*;
 
@@ -30,7 +29,7 @@ public class DSView extends View {
     }
 
 
-    protected void AnimatePath(GElement element, Vector2D start, Vector2D end, int steps) {
+    protected void AnimatePath(Element element, Vector2D start, Vector2D end, int steps) {
         int j;
         if (skipAnimation) {
             element.moveToPosition(end);
@@ -47,14 +46,14 @@ public class DSView extends View {
 
     protected void AnimateToSameLocation(Vector elementVec, Vector2D end) {
         if (elementVec.size() > 0) {
-            GElement elem = (GElement) elementVec.elementAt(0);
+            Element elem = (Element) elementVec.elementAt(0);
 
             int pathLength = (int) (Math.sqrt((elem.getPositionX() - end.getX()) * (elem.getPositionX() - end.getX()) +
                     (elem.getPositionY() - end.getY()) * (elem.getPositionY() - end.getY()))) / 3;
             Vector2D paths[][] = createPaths(elementVec, end, pathLength);
             for (int i = 0; i < pathLength; i++) {
                 for (int j = 0; j < elementVec.size(); j++) {
-                    GElement e = (GElement) elementVec.elementAt(j);
+                    Element e = (Element) elementVec.elementAt(j);
                     e.moveToPosition(paths[j][i]);
                 }
                 repaintwaitmin();
@@ -66,7 +65,7 @@ public class DSView extends View {
 
     protected Vector2D[][] createPaths(Vector elementVec, Vector2D end) {
         if (elementVec.size() > 0) {
-            GElement elem = (GElement) elementVec.elementAt(0);
+            Element elem = (Element) elementVec.elementAt(0);
 
             int pathLength = (int) Math.sqrt((elem.getPositionX() - end.getX()) * (elem.getPositionX() - end.getX()) +
                     (elem.getPositionY() - end.getY()) * (elem.getPositionY() - end.getY()));
@@ -80,7 +79,7 @@ public class DSView extends View {
     protected Vector2D[][] createPaths(Vector elementVec, Vector2D end, int steps) {
         Vector2D path[][] = new Vector2D[elementVec.size()][steps];
         for (int i = 0; i < elementVec.size(); i++) {
-            GElement elem = (GElement) elementVec.elementAt(i);
+            Element elem = (Element) elementVec.elementAt(i);
 
             double X = elem.getPositionX();
             double Y = elem.getPositionY();
@@ -98,8 +97,8 @@ public class DSView extends View {
         return path;
     }
 
-    protected void AnimatePath(GElement element1, Vector2D start1, Vector2D end1,
-                               GElement element2, Vector2D start2, Vector2D end2, int steps) {
+    protected void AnimatePath(Element element1, Vector2D start1, Vector2D end1,
+                               Element element2, Vector2D start2, Vector2D end2, int steps) {
         int j;
         if (skipAnimation) {
             element1.moveToPosition(end1);
@@ -116,9 +115,9 @@ public class DSView extends View {
 
     }
 
-    protected void AnimatePath(GElement element1, Vector2D start1, Vector2D end1,
-                               GElement element2, Vector2D start2, Vector2D end2,
-                               GElement element3, Vector2D start3, Vector2D end3, int steps) {
+    protected void AnimatePath(Element element1, Vector2D start1, Vector2D end1,
+                               Element element2, Vector2D start2, Vector2D end2,
+                               Element element3, Vector2D start3, Vector2D end3, int steps) {
         int j;
         if (skipAnimation) {
             element1.moveToPosition(end1);
@@ -138,29 +137,29 @@ public class DSView extends View {
 
     }
 
-    protected GElement[] BuildLineup(GElement g) {
-        GElement returnLineup[] = new GElement[1];
+    protected Element[] BuildLineup(Element g) {
+        Element returnLineup[] = new Element[1];
         returnLineup[0] = g;
         return returnLineup;
     }
 
-    protected GElement[] BuildLineup(GElement g1, GElement g2) {
-        GElement returnLineup[] = new GElement[2];
+    protected Element[] BuildLineup(Element g1, Element g2) {
+        Element returnLineup[] = new Element[2];
         returnLineup[0] = g1;
         returnLineup[1] = g2;
         return returnLineup;
     }
 
-    protected GElement[] BuildLineup(GElement g1, GElement g2, GElement g3) {
-        GElement returnLineup[] = new GElement[3];
+    protected Element[] BuildLineup(Element g1, Element g2, Element g3) {
+        Element returnLineup[] = new Element[3];
         returnLineup[0] = g1;
         returnLineup[1] = g2;
         returnLineup[2] = g3;
         return returnLineup;
     }
 
-    protected GElement[] BuildLineup(GElement g1, GElement g2, GElement g3, GElement g4) {
-        GElement returnLineup[] = new GElement[4];
+    protected Element[] BuildLineup(Element g1, Element g2, Element g3, Element g4) {
+        Element returnLineup[] = new Element[4];
         returnLineup[0] = g1;
         returnLineup[1] = g2;
         returnLineup[2] = g3;
@@ -168,8 +167,8 @@ public class DSView extends View {
         return returnLineup;
     }
 
-    protected GElement[] BuildLineup(GElement g1, GElement g2, GElement g3, GElement g4, GElement g5) {
-        GElement returnLineup[] = new GElement[5];
+    protected Element[] BuildLineup(Element g1, Element g2, Element g3, Element g4, Element g5) {
+        Element returnLineup[] = new Element[5];
         returnLineup[0] = g1;
         returnLineup[1] = g2;
         returnLineup[2] = g3;
@@ -178,8 +177,8 @@ public class DSView extends View {
         return returnLineup;
     }
 
-    protected GElement[] BuildLineup(GElement g1, GElement g2, GElement g3, GElement g4, GElement g5, GElement g6) {
-        GElement returnLineup[] = new GElement[6];
+    protected Element[] BuildLineup(Element g1, Element g2, Element g3, Element g4, Element g5, Element g6) {
+        Element returnLineup[] = new Element[6];
         returnLineup[0] = g1;
         returnLineup[1] = g2;
         returnLineup[2] = g3;
@@ -231,7 +230,7 @@ public class DSView extends View {
     }
 
 
-    protected void LineupHorizontal(GElement elems[]) {
+    protected void LineupHorizontal(Element elems[]) {
         if (elems.length != 0) {
             while (elems[0].getLabel().length() != 0 && elems[0].getFrame().r.width == 0) {
                 repaintwaitmin(1);
@@ -242,7 +241,7 @@ public class DSView extends View {
 
     }
 
-    protected void LineupHorizontal(Vector2D startposition, GElement elems[]) {
+    protected void LineupHorizontal(Vector2D startposition, Element elems[]) {
 
         int i;
 
@@ -258,43 +257,43 @@ public class DSView extends View {
 
     }
 
-    protected void LineupHorizontal(Vector2D startposition, GElement g) {
+    protected void LineupHorizontal(Vector2D startposition, Element g) {
         LineupHorizontal(new Vector2D(startposition.getX(), startposition.getY()), BuildLineup(g));
     }
 
-    protected void LineupHorizontal(Vector2D startposition, GElement g1, GElement g2) {
+    protected void LineupHorizontal(Vector2D startposition, Element g1, Element g2) {
         LineupHorizontal(startposition, BuildLineup(g1, g2));
     }
 
-    protected void LineupHorizontal(Vector2D startposition, GElement g1, GElement g2, GElement g3) {
+    protected void LineupHorizontal(Vector2D startposition, Element g1, Element g2, Element g3) {
         LineupHorizontal(startposition, BuildLineup(g1, g2, g3));
     }
 
-    protected void LineupHorizontal(Vector2D startposition, GElement g1, GElement g2, GElement g3, GElement g4) {
+    protected void LineupHorizontal(Vector2D startposition, Element g1, Element g2, Element g3, Element g4) {
         LineupHorizontal(startposition, BuildLineup(g1, g2, g3, g4));
     }
 
-    protected void LineupHorizontal(Vector2D startposition, GElement g1, GElement g2, GElement g3, GElement g4, GElement g5) {
+    protected void LineupHorizontal(Vector2D startposition, Element g1, Element g2, Element g3, Element g4, Element g5) {
         LineupHorizontal(startposition, BuildLineup(g1, g2, g3, g4, g5));
     }
 
-    protected void LineupHorizontal(Vector2D startposition, GElement g1, GElement g2, GElement g3, GElement g4, GElement g5, GElement g6) {
+    protected void LineupHorizontal(Vector2D startposition, Element g1, Element g2, Element g3, Element g4, Element g5, Element g6) {
         LineupHorizontal(startposition, BuildLineup(g1, g2, g3, g4, g5, g6));
     }
 
-    protected void LineupHorizontal(GElement g) {
+    protected void LineupHorizontal(Element g) {
         LineupHorizontal(BuildLineup(g));
     }
 
-    protected void LineupHorizontal(GElement g1, GElement g2) {
+    protected void LineupHorizontal(Element g1, Element g2) {
         LineupHorizontal(BuildLineup(g1, g2));
     }
 
-    protected void LineupHorizontal(GElement g1, GElement g2, GElement g3) {
+    protected void LineupHorizontal(Element g1, Element g2, Element g3) {
         LineupHorizontal(BuildLineup(g1, g2, g3));
     }
 
-    protected void LineupHorizontal(GElement g1, GElement g2, GElement g3, GElement g4) {
+    protected void LineupHorizontal(Element g1, Element g2, Element g3, Element g4) {
         LineupHorizontal(BuildLineup(g1, g2, g3, g4));
     }
 
@@ -482,22 +481,22 @@ public class DSView extends View {
         return c;
     }
 
-    public GElementLabel createLabel(String label, double x, double y) {
+    public ElementLabel createLabel(String label, double x, double y) {
         return createLabel(label, x, y, true);
     }
 
 
-    public GElementLabel createLabel(String label, Vector2D position) {
+    public ElementLabel createLabel(String label, Vector2D position) {
         return createLabel(label, position, true);
     }
 
-    public GElementLabel createLabel(String label, Vector2D position, boolean draggable) {
+    public ElementLabel createLabel(String label, Vector2D position, boolean draggable) {
         return createLabel(label, position.getX(), position.getY(), draggable);
     }
 
 
-    public GElementLabel createLabel(String label, double x, double y, boolean draggable) {
-        GElementLabel l = new GElementLabel();
+    public ElementLabel createLabel(String label, double x, double y, boolean draggable) {
+        ElementLabel l = new ElementLabel();
         l.setPosition(x, y);
         l.setLabel(label);
         l.setDraggable(draggable);
@@ -519,12 +518,12 @@ public class DSView extends View {
     }
 
 
-    public GElementArrow createArrow(double x1, double y1, double x2, double y2, double arrowLength) {
+    public ElementArrow createArrow(double x1, double y1, double x2, double y2, double arrowLength) {
         return createArrow(x1, y1, x2, y2, arrowLength, true);
     }
 
-    public GElementArrow createArrow(double x1, double y1, double x2, double y2, double arrowLength, boolean draggable) {
-        GElementArrow l = new GElementArrow();
+    public ElementArrow createArrow(double x1, double y1, double x2, double y2, double arrowLength, boolean draggable) {
+        ElementArrow l = new ElementArrow();
         l.setArrowLength(arrowLength);
         l.setSource(x1, y1);
         l.setTarget(x2, y2);
@@ -534,15 +533,15 @@ public class DSView extends View {
     }
 
     public DSShapeLink createLink(int source, int target, int shape, String sourceAnchor, String targetAnchor, String label, float flateness) {
-        DSShapeLink l = new DSShapeLink((GElement) shapes.get(source), sourceAnchor,
-                (GElement) shapes.get(target), targetAnchor,
+        DSShapeLink l = new DSShapeLink((Element) shapes.get(source), sourceAnchor,
+                (Element) shapes.get(target), targetAnchor,
                 shape, label, flateness);
         links.add(l);
         addElement(l);
         return l;
     }
 
-    public DSShapeLink createLink(GElement source, GElement target, int shape, String sourceAnchor, String targetAnchor, String label, float flateness) {
+    public DSShapeLink createLink(Element source, Element target, int shape, String sourceAnchor, String targetAnchor, String label, float flateness) {
         DSShapeLink l = new DSShapeLink(source, sourceAnchor,
                 target, targetAnchor,
                 shape, label, flateness);
@@ -554,12 +553,12 @@ public class DSView extends View {
     public void performActionOnAllElements(DSAction action) {
 
         for (int i = 0; i < shapes.size(); i++) {
-            GElement element = (GElement) shapes.get(i);
+            Element element = (Element) shapes.get(i);
             action.perform(element, i);
         }
 
         for (int i = 0; i < links.size(); i++) {
-            GElement element = (GElement) links.get(i);
+            Element element = (Element) links.get(i);
             action.perform(element, i);
         }
     }
@@ -574,21 +573,21 @@ public class DSView extends View {
 
     public void removeShape(int index) {
         if (index >= 0 && index < shapes.size()) {
-            getRootElement().removeElement((GElement) shapes.get(index));
+            getRootElement().removeElement((Element) shapes.get(index));
             shapes.remove(index);
         }
     }
 
     public void removeLink(int e1, int e2) {
         if (e1 >= 0 && e2 >= 0 && e1 < shapes.size() && e2 < shapes.size()) {
-            removeLink((GElement) shapes.get(e1), (GElement) shapes.get(e2));
+            removeLink((Element) shapes.get(e1), (Element) shapes.get(e2));
         }
     }
 
-    public void removeLink(GElement e1, GElement e2) {
+    public void removeLink(Element e1, Element e2) {
 
         for (int i = links.size() - 1; i >= 0; i--) {
-            GLink link = (GLink) links.get(i);
+            Link link = (Link) links.get(i);
             if (link.source == e1 && link.target == e2) {
                 getRootElement().removeElement(link);
                 links.remove(i);
@@ -596,9 +595,9 @@ public class DSView extends View {
         }
     }
 
-    public GLink getLink(GElement e1, GElement e2) {
+    public Link getLink(Element e1, Element e2) {
         for (int i = links.size() - 1; i >= 0; i--) {
-            GLink link = (GLink) links.get(i);
+            Link link = (Link) links.get(i);
             if (link.source == e1 && link.target == e2) {
                 return link;
             }
@@ -607,7 +606,7 @@ public class DSView extends View {
         return null;
     }
 
-    public void removeAny(GElement e) {
+    public void removeAny(Element e) {
         int i;
         if (e == null) {
             return;
@@ -625,7 +624,7 @@ public class DSView extends View {
         getRootElement().removeElement(e);
     }
 
-    public void removeShape(GElement element) {
+    public void removeShape(Element element) {
         int i;
         for (i = 0; i < shapes.size(); i++) {
             if (shapes.get(i) == element) {
@@ -635,8 +634,8 @@ public class DSView extends View {
 
     }
 
-    private void addElement(GElement element) {
-        GElement root = getRootElement();
+    private void addElement(Element element) {
+        Element root = getRootElement();
         if (root == null) {
             setRootElement(element);
         } else {
@@ -733,7 +732,7 @@ public class DSView extends View {
         }
 
         Map map = (Map) data;
-        setRootElement((GElement) map.get("root"));
+        setRootElement((Element) map.get("root"));
 
         shapes = (List) map.get("shapes");
         links = (List) map.get("links");
@@ -752,10 +751,10 @@ public class DSView extends View {
 
     public void StartingAnimation() {
         int i;
-        GElement e;
+        Element e;
         if (HoldoverGraphics != null) {
             for (i = 0; i < HoldoverGraphics.size(); i++) {
-                e = (GElement) HoldoverGraphics.elementAt(i);
+                e = (Element) HoldoverGraphics.elementAt(i);
                 removeAny(e);
             }
         }

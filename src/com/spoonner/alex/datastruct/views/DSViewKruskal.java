@@ -1,12 +1,11 @@
 package com.spoonner.alex.datastruct.views;
 
+import com.spoonner.alex.appkit.core.gview.object.*;
 import com.spoonner.alex.datastruct.shapes.DSShapeCircle;
 import com.spoonner.alex.datastruct.shapes.DSShapeLink;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
 
 import java.awt.*;
 
@@ -42,8 +41,8 @@ public class DSViewKruskal extends DSViewGraph {
     protected int indep_set_index_x = SMALL_INDEP_SET_INDEX_X;
 
 
-    protected GElementLabel ISindex[];
-    protected GElement IndepSet[];
+    protected ElementLabel ISindex[];
+    protected Element IndepSet[];
 
 
 
@@ -65,8 +64,8 @@ public class DSViewKruskal extends DSViewGraph {
         int i, j;
         int currentX;
 
-        IndepSet = new GElement[LARGESIZE];
-        ISindex = new GElementLabel[LARGESIZE];
+        IndepSet = new Element[LARGESIZE];
+        ISindex = new ElementLabel[LARGESIZE];
         YposIS = new int[LARGESIZE];
         Xpos = new int[70];
         Ypos = new int[70];
@@ -195,7 +194,7 @@ public class DSViewKruskal extends DSViewGraph {
                     EdgesList[numedges].V = createCircle(String.valueOf(j), Xpos[numedges] + EDGE_WIDTH / 2, Ypos[numedges]);
                     EdgesList[numedges].V.setRadius(10);
                     EdgesList[numedges].V.setColor(Color.WHITE);
-                    EdgesList[numedges].edge = createLink(EdgesList[numedges].U, EdgesList[numedges].V, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+                    EdgesList[numedges].edge = createLink(EdgesList[numedges].U, EdgesList[numedges].V, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                                                           String.valueOf(cost[i][j]), 0);
                     EdgesList[numedges].edge.setArrowVisible(false);
                     EdgesList[numedges].cost = cost[i][j];
@@ -212,13 +211,13 @@ public class DSViewKruskal extends DSViewGraph {
 
         int treesize = 0;
         while(numedges > 0 && treesize < size-1) {
-            GElementLabel animateLabel;
+            ElementLabel animateLabel;
             EdgesList[0].U.setLabelColor(Color.RED);
             EdgesList[0].V.setLabelColor(Color.RED);
             EdgesList[0].edge.setLabelColor(Color.RED);
             EdgesList[0].edge.setColor(Color.RED);
             setEdgeColor(EdgesList[0].u,EdgesList[0].v,Color.RED);
-            GElementLabel ulab = createLabel("Set("+EdgesList[0].u+")=",-10,-10);
+            ElementLabel ulab = createLabel("Set("+EdgesList[0].u+")=",-10,-10);
             LineupHorizontal(new Vector2D(110,20),ulab);
             int uset = find(IndepSet,EdgesList[0].u);
             animateLabel = createLabel(String.valueOf(uset),ISindex[uset].getPositionX(),ISindex[uset].getPositionY(),false);
@@ -227,7 +226,7 @@ public class DSViewKruskal extends DSViewGraph {
             ulab.setLabel(ulab.getLabel() + uset);
             LineupHorizontal(new Vector2D(110,20),ulab);
             repaintwait();
-            GElementLabel vlab = createLabel("Set("+EdgesList[0].v+")=",-10,-10);
+            ElementLabel vlab = createLabel("Set("+EdgesList[0].v+")=",-10,-10);
             LineupHorizontal(new Vector2D(200,20),vlab);
             int vset = find(IndepSet,EdgesList[0].v);
             animateLabel = createLabel(String.valueOf(vset),ISindex[vset].getPositionX(),ISindex[vset].getPositionY(),false);
@@ -291,8 +290,8 @@ public class DSViewKruskal extends DSViewGraph {
 
     }
 
-    protected int find(GElement IndepSet[],int elem) {
-        GElementArrow emph = createArrow(5,YposIS[elem],indep_set_index_x -15,YposIS[elem],10);
+    protected int find(Element IndepSet[], int elem) {
+        ElementArrow emph = createArrow(5,YposIS[elem],indep_set_index_x -15,YposIS[elem],10);
         int newelem;
         IndepSet[elem].setLabelColor(Color.RED);
         repaintwait();

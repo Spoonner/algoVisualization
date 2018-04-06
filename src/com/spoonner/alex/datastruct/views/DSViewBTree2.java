@@ -2,10 +2,10 @@ package com.spoonner.alex.datastruct.views;
 
 
 import com.spoonner.alex.datastruct.shapes.DSShapeRectMultiLabel;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -22,7 +22,7 @@ public class DSViewBTree2 extends DSView {
     protected int widthdelta = 50;
     protected int HEIGHT_DELTA = 60;
     protected final int MOVESTEPS = 40;
-    GElement elementLabel;
+    Element elementLabel;
 
     protected static final int MIN_CHILDREN = 2;
     protected static final int MIN_KEYS = MIN_CHILDREN - 1;
@@ -34,7 +34,7 @@ public class DSViewBTree2 extends DSView {
     protected static final int FIRST_ARROW_OFFSET = 5;
     protected static final int ARROW_Y_OFFSET = 3;
 
-    protected GElementLabel InsertLabel;
+    protected ElementLabel InsertLabel;
 
 
     public DSViewBTree2() {
@@ -65,7 +65,7 @@ public class DSViewBTree2 extends DSView {
             root.numkeys = 1;
             root.keys[0] = insertElem;
         } else {
-            GElementLabel insertcaption = createLabel("Inserting: ", 100, 40);
+            ElementLabel insertcaption = createLabel("Inserting: ", 100, 40);
             InsertLabel = createLabel(insertElem, -10, -10);
             LineupHorizontal(insertcaption, InsertLabel);
             insert(insertElem, root);
@@ -76,7 +76,7 @@ public class DSViewBTree2 extends DSView {
     }
 
     protected BTreeNode split(BTreeNode tree) {
-        GElement circle = createCircle("", tree.display.getPositionX(), tree.display.getPositionY(), false);
+        Element circle = createCircle("", tree.display.getPositionX(), tree.display.getPositionY(), false);
         circle.setColor(Color.RED);
         tree.display.setLabelColor(0, Color.GREEN);
         tree.display.setLabelColor(1, Color.BLUE);
@@ -95,8 +95,8 @@ public class DSViewBTree2 extends DSView {
             right.children[1] = tree.children[3];
             tree.children[2].parent = right;
             tree.children[3].parent = right;
-            right.edges[0] = createLink(right.display, tree.children[2].display, GLink.SHAPE_ARC, GElement.ANCHOR_LEFT, GElement.ANCHOR_TOP, "", 0);
-            right.edges[1] = createLink(right.display, tree.children[3].display, GLink.SHAPE_ARC, GElement.ANCHOR_LEFT, GElement.ANCHOR_TOP, "", 0);
+            right.edges[0] = createLink(right.display, tree.children[2].display, Link.SHAPE_ARC, Element.ANCHOR_LEFT, Element.ANCHOR_TOP, "", 0);
+            right.edges[1] = createLink(right.display, tree.children[3].display, Link.SHAPE_ARC, Element.ANCHOR_LEFT, Element.ANCHOR_TOP, "", 0);
             right.edges[0].setSourceOffset(FIRST_ARROW_OFFSET, ARROW_Y_OFFSET);
             right.edges[1].setSourceOffset(WIDTHS[1] - FIRST_ARROW_OFFSET, ARROW_Y_OFFSET);
         }
@@ -119,9 +119,9 @@ public class DSViewBTree2 extends DSView {
             root.numkeys = 1;
             left.parent = root;
             right.parent = root;
-            root.edges[0] = createLink(root.display, left.display, GLink.SHAPE_ARC, GElement.ANCHOR_LEFT, GElement.ANCHOR_TOP, "", 0);
+            root.edges[0] = createLink(root.display, left.display, Link.SHAPE_ARC, Element.ANCHOR_LEFT, Element.ANCHOR_TOP, "", 0);
             root.edges[0].setSourceOffset(FIRST_ARROW_OFFSET, ARROW_Y_OFFSET);
-            root.edges[1] = createLink(root.display, right.display, GLink.SHAPE_ARC, GElement.ANCHOR_LEFT, GElement.ANCHOR_TOP, "", 0);
+            root.edges[1] = createLink(root.display, right.display, Link.SHAPE_ARC, Element.ANCHOR_LEFT, Element.ANCHOR_TOP, "", 0);
             root.edges[1].setSourceOffset(WIDTHS[1] - FIRST_ARROW_OFFSET, ARROW_Y_OFFSET);
             root.leaf = false;
             resizetree();
@@ -138,7 +138,7 @@ public class DSViewBTree2 extends DSView {
                 parent.edges[j + 1] = parent.edges[j];
                 parent.children[j + 1] = parent.children[j];
             }
-            parent.edges[j + 1] = createLink(parent.display, right.display, GLink.SHAPE_ARC, GElement.ANCHOR_LEFT, GElement.ANCHOR_TOP, "", 0);
+            parent.edges[j + 1] = createLink(parent.display, right.display, Link.SHAPE_ARC, Element.ANCHOR_LEFT, Element.ANCHOR_TOP, "", 0);
             parent.keys[j] = tree.keys[1];
             parent.children[j + 1] = right;
             parent.numkeys++;
@@ -366,8 +366,8 @@ public class DSViewBTree2 extends DSView {
 
     public void delete(String removeitem) {
 
-        GElementLabel deletecaption = createLabel("Deleting: ", 100, 40);
-        GElementLabel deleteLabel = createLabel(removeitem, -10, -10);
+        ElementLabel deletecaption = createLabel("Deleting: ", 100, 40);
+        ElementLabel deleteLabel = createLabel(removeitem, -10, -10);
         LineupHorizontal(deletecaption, deleteLabel);
 
 
@@ -450,8 +450,8 @@ public class DSViewBTree2 extends DSView {
         leftsib.numkeys--;
         child.numkeys++;
         leftsib.display.setLabel(leftsib.numkeys,"");
-        GElementLabel l1 = createLabel(parent.keys[childIndex-1],leftsib.display.getLabelPosition(leftsib.numkeys));
-        GElementLabel l2 = createLabel(child.keys[0],parent.display.getLabelPosition(childIndex-1));
+        ElementLabel l1 = createLabel(parent.keys[childIndex-1],leftsib.display.getLabelPosition(leftsib.numkeys));
+        ElementLabel l2 = createLabel(child.keys[0],parent.display.getLabelPosition(childIndex-1));
         AnimatePath(l1,l1.getPosition(),  l2.getPosition(),
                     l2, l2.getPosition(),child.display.getLabelPosition(0),40);
         removeAny(l1);
@@ -482,7 +482,7 @@ public class DSViewBTree2 extends DSView {
 
 
         parent.display.setLabel(childIndex,"");
-        GElementLabel l = createLabel(parent.keys[childIndex],parent.display.getLabelPosition(childIndex));
+        ElementLabel l = createLabel(parent.keys[childIndex],parent.display.getLabelPosition(childIndex));
 
 
         double middle = (child.display.getPositionX() + rightsib.display.getPositionX()) / 2;
@@ -558,8 +558,8 @@ public class DSViewBTree2 extends DSView {
         child.display.setNumLabels(child.numkeys);
         child.display.setWidth(WIDTHS[child.numkeys]);
 
-        GElementLabel l1 = createLabel(rightsib.keys[0],rightsib.display.getLabelPosition(0));
-        GElementLabel l2 = createLabel(parent.keys[childIndex],parent.display.getLabelPosition(childIndex));
+        ElementLabel l1 = createLabel(rightsib.keys[0],rightsib.display.getLabelPosition(0));
+        ElementLabel l2 = createLabel(parent.keys[childIndex],parent.display.getLabelPosition(childIndex));
         AnimatePath(l1,l1.getPosition(),  l2.getPosition(),
                     l2, l2.getPosition(),child.display.getLabelPosition(child.numkeys-1),40);
 
@@ -627,7 +627,7 @@ public class DSViewBTree2 extends DSView {
                for (;i<newroot.numkeys-1;i++) {
                    newroot.display.setLabel(i,"");
                    newroot.display.setLabel(i+1,"");
-                   GElementLabel l = createLabel(newroot.keys[i+1],newroot.display.getLabelPosition(i+1));
+                   ElementLabel l = createLabel(newroot.keys[i+1],newroot.display.getLabelPosition(i+1));
                    AnimatePath(l, l.getPosition(), newroot.display.getLabelPosition(i),10);
                    removeAny(l);
                    newroot.keys[i] = newroot.keys[i+1];
@@ -673,7 +673,7 @@ public class DSViewBTree2 extends DSView {
                 newroot.keys[i] = smallest.keys[0];
                 newroot.display.setLabel(i,"");
                 smallest.display.setLabel(0,"");
-                GElementLabel l = createLabel(smallest.keys[0],smallest.display.getLabelPosition(0));
+                ElementLabel l = createLabel(smallest.keys[0],smallest.display.getLabelPosition(0));
                 AnimatePath(l,l.getPosition(), newroot.display.getLabelPosition(i),30);
                 removeAny(l);
                 smallest.display.setColor(Color.BLACK);
@@ -770,10 +770,10 @@ public class DSViewBTree2 extends DSView {
 
     public void find(String finditem) {
 
-        GElement findlabel = createLabel("Finding:", 100, 40, false);
+        Element findlabel = createLabel("Finding:", 100, 40, false);
         elementLabel = createLabel(String.valueOf(finditem), 170, 40, false);
         elementLabel.setLabelColor(Color.RED);
-        GElement found = find(finditem, root);
+        Element found = find(finditem, root);
         if (found != null) {
             findlabel.setLabel("Found:");
             repaintwait();
@@ -788,7 +788,7 @@ public class DSViewBTree2 extends DSView {
         HoldoverGraphics.addElement(elementLabel);
     }
 
-    public GElement find(String finditem, BTreeNode tree) {
+    public Element find(String finditem, BTreeNode tree) {
         int i;
         if (tree == null)
             return null;
@@ -821,7 +821,7 @@ public class DSViewBTree2 extends DSView {
 
     protected class BTreeNode {
         BTreeNode[] children;
-        GLink[] edges;
+        Link[] edges;
         int numkeys;
         BTreeNode parent;
         String keys[];
@@ -846,7 +846,7 @@ public class DSViewBTree2 extends DSView {
             parent = null;
             newY = -1;
             leaf = true;
-            edges = new GLink[MAX_CHILDREN+1];
+            edges = new Link[MAX_CHILDREN+1];
             widths = new int[MAX_CHILDREN+1];
         }
 
@@ -864,7 +864,7 @@ public class DSViewBTree2 extends DSView {
             newY = -1;
             display = disp;
             leaf = true;
-            edges = new GLink[MAX_CHILDREN+1];
+            edges = new Link[MAX_CHILDREN+1];
             widths = new int[MAX_CHILDREN+1];
 
 

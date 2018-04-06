@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct.views;
 
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 import com.spoonner.alex.datastruct.shapes.DSShapeRect;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
 
 import java.awt.*;
 import java.util.Vector;
@@ -45,8 +45,8 @@ public class DSViewDynamicProg2 extends DSView
     private static int PLUSOFFSET = 40;
 
 
-    protected GElementLabel[] code = new GElementLabel[14];
-    protected GElement Labels[] = new GElement[1000];
+    protected ElementLabel[] code = new ElementLabel[14];
+    protected Element Labels[] = new Element[1000];
     protected int labelindex = 0;
 
 
@@ -177,7 +177,7 @@ public class DSViewDynamicProg2 extends DSView
             TableL[i] = new DSShapeRect[n + 1];
             Table[i] = new int[n + 1];
         }
-        GElementLabel indicies[] = new GElementLabel[n + 1 + amount_table_size];
+        ElementLabel indicies[] = new ElementLabel[n + 1 + amount_table_size];
         setupTables(TableL, indicies, Table, n);
 
         Labels[labelindex++] = createLabel("change(" + n + ") = ",
@@ -203,7 +203,7 @@ public class DSViewDynamicProg2 extends DSView
 
     }
 
-    protected void setupTables(DSShapeRect TableL[][], GElementLabel indicies[], int Table[][], int n)
+    protected void setupTables(DSShapeRect TableL[][], ElementLabel indicies[], int Table[][], int n)
     {
 
 
@@ -252,7 +252,7 @@ public class DSViewDynamicProg2 extends DSView
                                            XSTART, YSTART - 8, false);
 
 
-        GElementLabel description = createLabel("", TableX[20], TableY[0] - 3 * YDIFF_TABLE, false);
+        ElementLabel description = createLabel("", TableX[20], TableY[0] - 3 * YDIFF_TABLE, false);
         DSShapeRect TableL[][] = new DSShapeRect[amount_table_size][];
         int Table[][] = new int[amount_table_size][];
         for (i = 0; i < amount_table_size; i++)
@@ -260,7 +260,7 @@ public class DSViewDynamicProg2 extends DSView
             TableL[i] = new DSShapeRect[n + 1];
             Table[i] = new int[n + 1];
         }
-        GElementLabel indicies[] = new GElementLabel[n + 1 + amount_table_size];
+        ElementLabel indicies[] = new ElementLabel[n + 1 + amount_table_size];
         setupTables(TableL, indicies, Table, n);
 
         for (i = 0; i <= n; i++)
@@ -296,7 +296,7 @@ public class DSViewDynamicProg2 extends DSView
         }
         removeAny(description);
 
-        GElementLabel result = createLabel(Integer.toString(Table[amount_table_size - 1][n]),
+        ElementLabel result = createLabel(Integer.toString(Table[amount_table_size - 1][n]),
                                            TableX[n],
                                            TableY[n] + amount_table_size * YDIFF_TABLE,
                                            false);
@@ -330,7 +330,7 @@ public class DSViewDynamicProg2 extends DSView
                                            false);
         if (Table[d][n] > 0)
         {
-            GElementLabel moveLabel = createLabel(TableL[d][n].getLabel(), TableL[d][n].getPosition(), false);
+            ElementLabel moveLabel = createLabel(TableL[d][n].getLabel(), TableL[d][n].getPosition(), false);
             AnimatePath(moveLabel, moveLabel.getPosition(), Labels[labelindex - 1].getPosition(), 20);
             removeAny(moveLabel);
             Labels[labelindex - 1].setLabel(Long.toString(Table[d][n]));
@@ -347,7 +347,7 @@ public class DSViewDynamicProg2 extends DSView
                                                    xoffset * XDIFF + XSTART,
                                                    yoffset * YDIFF + YSTART, false);
                 Table[d][n] = n / this.d[0];
-                GElementLabel moveLabel = createLabel(TableL[d][n].getLabel(), TableL[d][n].getPosition(), false);
+                ElementLabel moveLabel = createLabel(TableL[d][n].getLabel(), TableL[d][n].getPosition(), false);
                 AnimatePath(moveLabel, Labels[labelindex - 1].getPosition(), TableL[d][n].getPosition(), 20);
                 removeAny(moveLabel);
                 TableL[d][n].setLabel(Integer.toString(Table[d][n]));

@@ -1,12 +1,12 @@
 package com.spoonner.alex.datastruct.shapes;
 
-import com.spoonner.alex.appkit.appkit.gview.object.GElementCircle;
-import com.spoonner.alex.appkit.appkit.gview.shape.SLabel;
+import com.spoonner.alex.appkit.core.gview.object.ElementCircle;
+import com.spoonner.alex.appkit.core.gview.shape.LabelShape;
 import com.spoonner.alex.appkit.misc.XMLSerializable;
 
 import java.awt.*;
 
-public class DSShapeCircle extends GElementCircle implements XMLSerializable {
+public class DSShapeCircle extends ElementCircle implements XMLSerializable {
 
     protected boolean doublelabel;
     protected String secondLabel;
@@ -46,9 +46,9 @@ public class DSShapeCircle extends GElementCircle implements XMLSerializable {
 
         if(labelVisible) {
             g.setColor(secondLabelColor);
-            SLabel.drawCenteredString(getSecondLabel(), (int)getPositionX(), (int) (getPositionY() -radius*.4), g);
+            LabelShape.drawCenteredString(getSecondLabel(), (int)getPositionX(), (int) (getPositionY() -radius*.4), g);
             g.setColor(labelColor);
-            SLabel.drawCenteredString(getLabel(), (int)getPositionX(), (int)(getPositionY()+radius*.4), g);
+            LabelShape.drawCenteredString(getLabel(), (int)getPositionX(), (int)(getPositionY()+radius*.4), g);
         }
 
         if(color != null)

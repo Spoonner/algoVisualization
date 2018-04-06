@@ -1,11 +1,11 @@
 package com.spoonner.alex.datastruct.views;
 
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 import com.spoonner.alex.datastruct.shapes.DSShapeNullPointer;
 import com.spoonner.alex.datastruct.shapes.DSShapeSingleLLU;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 
 import java.awt.*;
 
@@ -28,7 +28,7 @@ public class DSViewHashOpen extends DSViewHash {
 
 
     protected HashElem HashList[];
-    protected GElementLabel index[];
+    protected ElementLabel index[];
     protected DSShapeNullPointer frame[];
     protected int Xpos[];
     protected final int Ypos = 400;
@@ -45,7 +45,7 @@ public class DSViewHashOpen extends DSViewHash {
 
         Xpos = new int[HASHSIZE];
         HashList = new HashElem[HASHSIZE];
-        index = new GElementLabel[HASHSIZE];
+        index = new ElementLabel[HASHSIZE];
         frame = new DSShapeNullPointer[HASHSIZE];
 
 
@@ -125,10 +125,10 @@ public class DSViewHashOpen extends DSViewHash {
         } else {
             insertElem.elem.setPointerVoid(false);
             removeLink(frame[indx], HashList[indx].elem);
-            GLink l2 = createLink(insertElem.elem, HashList[indx].elem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+            Link l2 = createLink(insertElem.elem, HashList[indx].elem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
             l2.setSourceOffset(0, ELEMHEIGHT * insertElem.elem.getpercentLink() / 2);
         }
-        GLink l = createLink(frame[indx], insertElem.elem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+        Link l = createLink(frame[indx], insertElem.elem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
         l.setSourceOffset(0, ARRAYELEMHEIGHT / 2);
         HashList[indx] = insertElem;
         repaintwait();
@@ -177,7 +177,7 @@ public class DSViewHashOpen extends DSViewHash {
             removeLink(frame[deleteindex], HashList[deleteindex].elem);
             if (HashList[deleteindex].next != null) {
                 removeLink(HashList[deleteindex].elem, HashList[deleteindex].next.elem);
-                GLink l2 = createLink(frame[deleteindex], HashList[deleteindex].next.elem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+                Link l2 = createLink(frame[deleteindex], HashList[deleteindex].next.elem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
                 l2.setSourceOffset(0, ARRAYELEMHEIGHT / 2);
             } else {
                 frame[deleteindex].setNull(true);
@@ -199,7 +199,7 @@ public class DSViewHashOpen extends DSViewHash {
                     tmp.elem.setPointerVoid(true);
                 } else {
                     removeLink(tmp.next.elem, tmp.next.next.elem);
-                    GLink l2 = createLink(tmp.elem, tmp.next.next.elem, GLink.SHAPE_ARC, GElement.ANCHOR_TOP, GElement.ANCHOR_BOTTOM, "", 0);
+                    Link l2 = createLink(tmp.elem, tmp.next.next.elem, Link.SHAPE_ARC, Element.ANCHOR_TOP, Element.ANCHOR_BOTTOM, "", 0);
                     l2.setSourceOffset(0, ELEMHEIGHT * tmp.elem.getpercentLink() / 2);
 
                 }
@@ -232,13 +232,13 @@ public class DSViewHashOpen extends DSViewHash {
 
         }
         if (found) {
-            GElementLabel l = createLabel("Element " + key + " found", -10, -10);
-            GElement lineup[] = {l};
+            ElementLabel l = createLabel("Element " + key + " found", -10, -10);
+            Element lineup[] = {l};
             LineupHorizontal(new Vector2D(20, 50), lineup);
             HoldoverGraphics.add(l);
         } else {
-            GElementLabel l = createLabel("Element " + key + " NOT found", -10, -10);
-            GElement lineup[] = {l};
+            ElementLabel l = createLabel("Element " + key + " NOT found", -10, -10);
+            Element lineup[] = {l};
             LineupHorizontal(new Vector2D(20, 50), lineup);
 
             HoldoverGraphics.add(l);

@@ -1,11 +1,11 @@
 package com.spoonner.alex.datastruct.views;
 
 
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 import com.spoonner.alex.datastruct.shapes.DSShapeNullPointer;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
 
 import java.awt.*;
 
@@ -29,11 +29,11 @@ public class DSViewHashClosed extends DSViewHash {
     protected final int ARRAYELEMHEIGHT = 30;
 
 
-    protected GElementLabel index[];
+    protected ElementLabel index[];
     protected DSShapeNullPointer frame[];
 
 
-    protected GElement HashList[];
+    protected Element HashList[];
     protected boolean deleted[];
     protected int Ypos[];
     protected int Xpos[];
@@ -47,8 +47,8 @@ public class DSViewHashClosed extends DSViewHash {
         HASHSIZE = 23;
         Xpos = new int[HASHSIZE];
         Ypos = new int[HASHSIZE];
-        HashList = new GElement[HASHSIZE];
-        index = new GElementLabel[HASHSIZE];
+        HashList = new Element[HASHSIZE];
+        index = new ElementLabel[HASHSIZE];
         deleted = new boolean[HASHSIZE];
 
 
@@ -111,7 +111,7 @@ public class DSViewHashClosed extends DSViewHash {
         int i, j;
         Vector2D[] path;
         int nextindex;
-        GElementArrow emphasis = createArrow(Xpos[0] - ARRAYELEMWIDTH / 2, Ypos[0] + ARRAYELEMHEIGHT / 2 + 22 + 20,
+        ElementArrow emphasis = createArrow(Xpos[0] - ARRAYELEMWIDTH / 2, Ypos[0] + ARRAYELEMHEIGHT / 2 + 22 + 20,
                                              Xpos[0] - ARRAYELEMWIDTH / 2, Ypos[0] + ARRAYELEMHEIGHT / 2 + 22, 10);
         for (i = 0; i < 2 * HASHSIZE; i++) {
             nextindex = next(startindex, i);
@@ -149,7 +149,7 @@ public class DSViewHashClosed extends DSViewHash {
         int i, j;
         Vector2D[] path;
         int nextindex;
-        GElementArrow emphasis = createArrow(Xpos[0] - ARRAYELEMWIDTH / 2, Ypos[0] + ARRAYELEMHEIGHT / 2 + 22 + 20,
+        ElementArrow emphasis = createArrow(Xpos[0] - ARRAYELEMWIDTH / 2, Ypos[0] + ARRAYELEMHEIGHT / 2 + 22 + 20,
                                              Xpos[0] - ARRAYELEMWIDTH / 2, Ypos[0] + ARRAYELEMHEIGHT / 2 + 22, 10);
         for (i = 0; i < 2 * HASHSIZE; i++) {
             nextindex = next(indx, i);
@@ -177,11 +177,11 @@ public class DSViewHashClosed extends DSViewHash {
 
     protected void insertinto(int indx, String key) {
 
-       GElementLabel l1 = null;
+       ElementLabel l1 = null;
 
         if (hashStrategy == DOUBLEHASHING) {
             l1 = createLabel("hash2("+key+") = 7 - "+(int) hashval+ " % 7 = " + (7-hashval%7),-10,-10);
-            GElement lup[] = {l1};
+            Element lup[] = {l1};
             LineupHorizontal(new Vector2D(20,50),lup);
         }
         indx = findEmpty(indx);
@@ -190,7 +190,7 @@ public class DSViewHashClosed extends DSViewHash {
             deleted[indx] = false;
             HashList[indx].setLabelColor(Color.BLACK);
         } else {
-            GElementLabel failed = createLabel("Insertion failed", 300, 20);
+            ElementLabel failed = createLabel("Insertion failed", 300, 20);
             HoldoverGraphics.add(failed);
         }
         if (hashStrategy == DOUBLEHASHING)
@@ -239,13 +239,13 @@ public class DSViewHashClosed extends DSViewHash {
 
 
         if (foundindex >= 0) {
-            GElementLabel l = createLabel("Element " + key + " found", -10, -10);
-            GElement lineup[] = {l};
+            ElementLabel l = createLabel("Element " + key + " found", -10, -10);
+            Element lineup[] = {l};
             LineupHorizontal(new Vector2D(20, 50), lineup);
             HoldoverGraphics.add(l);
         } else {
-            GElementLabel l = createLabel("Element " + key + " NOT found", -10, -10);
-            GElement lineup[] = {l};
+            ElementLabel l = createLabel("Element " + key + " NOT found", -10, -10);
+            Element lineup[] = {l};
             LineupHorizontal(new Vector2D(20, 50), lineup);
 
             HoldoverGraphics.add(l);

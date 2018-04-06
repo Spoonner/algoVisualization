@@ -1,11 +1,11 @@
 package com.spoonner.alex.datastruct.views;
 
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 import com.spoonner.alex.datastruct.shapes.DSShapeCircle;
 import com.spoonner.alex.datastruct.shapes.DSShapeColoredLabel;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ public class DSViewHuff extends DSView {
     protected HuffTree leaf[];
     protected int numChars;
     int numtrees;
-    protected GElementLabel encodeArray[];
-    GElementLabel[] encodeHeader;
+    protected ElementLabel encodeArray[];
+    ElementLabel[] encodeHeader;
 
 
     public DSViewHuff() {
@@ -83,7 +83,7 @@ public class DSViewHuff extends DSView {
         int j;
         numChars = 0;
         numtrees = 0;
-        GElementLabel inputlabelheader = createLabel("Input:  ",-10,-10,false);
+        ElementLabel inputlabelheader = createLabel("Input:  ",-10,-10,false);
         inputlabelheader.setLabelColor(Color.BLUE);
         inputlabel = createColoredLabel(input, -10, -10, false);
         LineupHorizontal(new Vector2D(5,10),inputlabelheader,inputlabel);
@@ -109,8 +109,8 @@ public class DSViewHuff extends DSView {
             }
         }
         numtrees = numChars;
-        encodeArray = new GElementLabel[numChars];
-        encodeHeader = new GElementLabel[numChars];
+        encodeArray = new ElementLabel[numChars];
+        encodeHeader = new ElementLabel[numChars];
 
 
         for (j = 0; j < numtrees; j++) {
@@ -153,8 +153,8 @@ public class DSViewHuff extends DSView {
             int nextheight = Math.max(leaf[0].height, leaf[1].height) + 1;
             HuffTree tmp = new HuffTree(createFreqCircle("", String.valueOf(leaf[0].frequency + leaf[1].frequency),
                                                          (maxheight+4)* 8 + leaf[0].leftwidth + leaf[0].rightwidth, YPOS - YDELTA * (nextheight-1)));
-            tmp.leftlink = createLink(tmp.circle, leaf[0].circle, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "0", -1);
-            tmp.rightlink = createLink(tmp.circle, leaf[1].circle, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "1", 1);
+            tmp.leftlink = createLink(tmp.circle, leaf[0].circle, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "0", -1);
+            tmp.rightlink = createLink(tmp.circle, leaf[1].circle, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "1", 1);
             tmp.left = leaf[0];
             tmp.right = leaf[1];
             leaf[0] = tmp;
@@ -176,14 +176,14 @@ public class DSViewHuff extends DSView {
             encodeHeader[i].setLabelColor(Color.BLUE);
             encodeArray[i] = createLabel("",25,i*15+30,false);
         }
-        GElement frameRec = createRectangle("",4*(maxheight+2)+1,numChars*15/2+27,8*(maxheight+2),numChars*15+2);
+        Element frameRec = createRectangle("",4*(maxheight+2)+1,numChars*15/2+27,8*(maxheight+2),numChars*15+2);
         frameRec.setColor(Color.BLUE);
 
  //       inputlabelheader.move(8*(maxheight+4)-8*(4+5),0);
   //      inputlabel.move(0,10);
-        GElementLabel codeheader = createLabel("Building Code:",300,40);
+        ElementLabel codeheader = createLabel("Building Code:",300,40);
         codeheader.setLabelColor(Color.BLUE);
-        GElementLabel code = createLabel("",-10,-10);
+        ElementLabel code = createLabel("",-10,-10);
         LineupHorizontal(codeheader,code);
         BuildCodes(leaf[0],code,codeheader,deref);
         removeAny(codeheader);
@@ -191,16 +191,16 @@ public class DSViewHuff extends DSView {
         ArrayList output = new ArrayList();
         int charsprinted = 0;
 
-        GElementLabel lab = createLabel("Encoded Output",-10,-10);
+        ElementLabel lab = createLabel("Encoded Output",-10,-10);
         LineupHorizontal(new Vector2D((maxheight+4)*8,26),lab);
         lab.setLabelColor(Color.BLUE);
-        GElementLabel moveLab;
+        ElementLabel moveLab;
         int currentline;
         for (currentline = 0; charsprinted < inputlabel.getLabel().length();currentline++) {
             output.add(createColoredLabel("",-10,-10));
 
             for (int currlinesize = 0; charsprinted < inputlabel.getLabel().length() && currlinesize < 100;) {
-                GElementLabel curline = (GElementLabel) output.get(currentline);
+                ElementLabel curline = (ElementLabel) output.get(currentline);
                 LineupHorizontal(new Vector2D((maxheight + 4) * 8,41+currentline*12),curline);
                 int indx2 = deref[inputlabel.getLabel().charAt(charsprinted)];
                 inputlabel.setLabelColorIndex(Color.RED,charsprinted);
@@ -227,15 +227,15 @@ public class DSViewHuff extends DSView {
 
         for (j=0; j<20;j++) {
             for (i=0; i<currentline;i++) {
-                GElement nextline = (GElement) output.get(i);
+                Element nextline = (Element) output.get(i);
                 nextline.move(0,-1);
             }
             lab.move(0,-1);
             repaintwaitmin();
         }
-        GElementLabel finaloutlab = createLabel("Decoded output: ",-10,-10);
+        ElementLabel finaloutlab = createLabel("Decoded output: ",-10,-10);
         finaloutlab.setLabelColor(Color.BLUE);
-        GElementLabel finalout = createLabel("",-10,-10);
+        ElementLabel finalout = createLabel("",-10,-10);
         LineupHorizontal(new Vector2D((maxheight+4)*8,output.size()*12+23),finaloutlab,finalout);
         Vector2D outputposition = new Vector2D(finalout.getPositionX(),finalout.getPositionY());
         for (i=0;i<currentline;i++) {
@@ -265,12 +265,12 @@ public class DSViewHuff extends DSView {
 
     }
 
-    private int decode(HuffTree huffTree, DSShapeColoredLabel curline, int index, GElementLabel finalout,Vector2D position) {
+    private int decode(HuffTree huffTree, DSShapeColoredLabel curline, int index, ElementLabel finalout, Vector2D position) {
         if (huffTree != null) {
             huffTree.circle.setColor(Color.RED);
             repaintwait();
             if (huffTree.left == null) {
-                GElementLabel movelab = createLabel(String.valueOf(huffTree.character),-10,-10);
+                ElementLabel movelab = createLabel(String.valueOf(huffTree.character),-10,-10);
                 movelab.setLabelVisible(false);
                 LineupHorizontal(finalout,movelab);
                 movelab.setLabelVisible(true);
@@ -321,10 +321,10 @@ public class DSViewHuff extends DSView {
         }
     }
 
-    protected void BuildCodes(HuffTree huffTree, GElementLabel code, GElement codeheader,int[] deref) {
+    protected void BuildCodes(HuffTree huffTree, ElementLabel code, Element codeheader, int[] deref) {
         Vector2D path[];
         int j;
-        GElementLabel moveLabel;
+        ElementLabel moveLabel;
         if (huffTree != null) {
             huffTree.circle.setColor(Color.RED);
             repaintwait();
@@ -466,7 +466,7 @@ public class DSViewHuff extends DSView {
         int newY;
         Vector2D path[];
         DSShapeCircle circle;
-        GLink leftlink, rightlink;
+        Link leftlink, rightlink;
         HuffTree left, right;
         int width;
 

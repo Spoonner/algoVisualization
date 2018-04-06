@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct.views;
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
 
 import java.awt.*;
 
@@ -22,10 +22,10 @@ public class DSViewSort extends DSView {
     protected final int ALLOCSIZE = 2 * SIZE;
 
     protected int SortData[];
-    protected GElement SortElements[];
-    protected GElement GraphicalElements[];
-    protected GElement ArrayFrame[];
-    protected GElement SortIndex[];
+    protected Element SortElements[];
+    protected Element GraphicalElements[];
+    protected Element ArrayFrame[];
+    protected Element SortIndex[];
     protected int Xpos[];
     protected int Ypos[];
     protected boolean Graphical;
@@ -37,10 +37,10 @@ public class DSViewSort extends DSView {
         Graphical = true;
         waitscalefactor = 10;
         SortData = new int[ALLOCSIZE];
-        SortElements = new GElement[ALLOCSIZE];
-        SortIndex = new GElement[ALLOCSIZE];
-        ArrayFrame = new GElement[ALLOCSIZE];
-        GraphicalElements = new GElement[ALLOCSIZE];
+        SortElements = new Element[ALLOCSIZE];
+        SortIndex = new Element[ALLOCSIZE];
+        ArrayFrame = new Element[ALLOCSIZE];
+        GraphicalElements = new Element[ALLOCSIZE];
         Xpos = new int[ALLOCSIZE];
         Ypos = new int[ALLOCSIZE];
         int i;
@@ -132,7 +132,7 @@ public class DSViewSort extends DSView {
         return (int) (y - ((((double) value) / 100 * MAXHEIGHT) / 2 + 12));
     }
 
-    private GElement BuildGrapicElement(int value, int xbase, int ybase) {
+    private Element BuildGrapicElement(int value, int xbase, int ybase) {
         int height = (int) (((double) value) / 100 * MAXHEIGHT);
         return createRectangle("", xbase, GetYPosGraphic(value, ybase), 10, height, false);
     }
@@ -190,7 +190,7 @@ public class DSViewSort extends DSView {
         int tmp = SortData[index1];
         SortData[index1] = SortData[index2];
         SortData[index2] = tmp;
-        GElement tmp2 = SortElements[index1];
+        Element tmp2 = SortElements[index1];
         SortElements[index1] = SortElements[index2];
         SortElements[index2] = tmp2;
         if (Graphical) {
@@ -489,7 +489,7 @@ public class DSViewSort extends DSView {
 
     protected int partition(int pivot, int low, int high) {
         int i,ydelta;
-        GElement pivotheight = null;
+        Element pivotheight = null;
 
         if (visableIndices)
             ydelta = 35;
@@ -500,11 +500,11 @@ public class DSViewSort extends DSView {
             pivotheight =  createRectangle("", Xpos[SIZE/2], GetYPosGraphic(SortData[pivot]*2, Ypos[0]), SIZE*(Xpos[1]-Xpos[0]),1, false);
             pivotheight.setColor(Color.RED);
         }
-        GElementArrow iarrow = createArrow(Xpos[low], Ypos[low] + 50+ydelta, Xpos[low], Ypos[low] + ydelta, 20, false);
-        GElementArrow jarrow = createArrow(Xpos[high], Ypos[high] +50+ydelta, Xpos[high], Ypos[high] +ydelta, 20, false);
+        ElementArrow iarrow = createArrow(Xpos[low], Ypos[low] + 50+ydelta, Xpos[low], Ypos[low] + ydelta, 20, false);
+        ElementArrow jarrow = createArrow(Xpos[high], Ypos[high] +50+ydelta, Xpos[high], Ypos[high] +ydelta, 20, false);
 
-        GElementLabel ilabel = createLabel("i", Xpos[low], Ypos[low] + 50+ydelta+5);
-        GElementLabel jlabel = createLabel("j", Xpos[high], Ypos[high] + 50+ydelta+5);
+        ElementLabel ilabel = createLabel("i", Xpos[low], Ypos[low] + 50+ydelta+5);
+        ElementLabel jlabel = createLabel("j", Xpos[high], Ypos[high] + 50+ydelta+5);
         Vector2D patharrow[];
         Vector2D pathlabel[];
 

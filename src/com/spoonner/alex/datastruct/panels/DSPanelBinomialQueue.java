@@ -12,15 +12,15 @@ import java.awt.event.ActionListener;
 public class DSPanelBinomialQueue extends DSPanel {
 
 
-    protected JTextField insertfield;
-    protected DSViewBinomialQueue queueView;
-    protected JRadioButton viewLogicalButton;
-    protected JRadioButton viewInternalButton;
-    protected int viewingCurrent = DSViewBinomialQueue.VIEW_LOGICAL;
+    private JTextField insertfield;
+    private DSViewBinomialQueue queueView;
+    private JRadioButton viewLogicalButton;
+    private JRadioButton viewInternalButton;
+    private int viewingCurrent = DSViewBinomialQueue.VIEW_LOGICAL;
 
 
     protected JButton insertButton;
-    protected JButton removeSmallestButton;
+    private JButton removeSmallestButton;
 
     public DSPanelBinomialQueue(DSWindow window) {
         super(window);
@@ -30,14 +30,12 @@ public class DSPanelBinomialQueue extends DSPanel {
 
         insertfield = new JTextField("");
         insertfield.setMaximumSize(new Dimension(50, 30));
-        insertfield.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent event) {
-                if (insertfield.getText().length() != 0) {
+        insertfield.addActionListener(event -> {
+            if (insertfield.getText().length() != 0) {
 
-                        animate(DSViewBinomialQueue.INSERT, extractString(insertfield.getText(),4));
+                    animate(DSViewBinomialQueue.INSERT, extractString(insertfield.getText(),4));
 
-                    insertfield.setText("");
-                }
+                insertfield.setText("");
             }
         });
         box.add(insertfield);
@@ -67,12 +65,10 @@ public class DSPanelBinomialQueue extends DSPanel {
         box.add(viewLogicalButton);
 
         viewInternalButton = new JRadioButton("View Internal Represntation");
-           viewInternalButton.addActionListener(new ActionListener() {
-               public void actionPerformed(ActionEvent event) {
-                   if (viewingCurrent != DSViewBinomialQueue.VIEW_INTERNAL) {
-                       animate(DSViewBinomialQueue.VIEW_INTERNAL);
-                       viewingCurrent = DSViewBinomialQueue.VIEW_INTERNAL;
-                   }
+           viewInternalButton.addActionListener(event -> {
+               if (viewingCurrent != DSViewBinomialQueue.VIEW_INTERNAL) {
+                   animate(DSViewBinomialQueue.VIEW_INTERNAL);
+                   viewingCurrent = DSViewBinomialQueue.VIEW_INTERNAL;
                }
            });
            box.add(viewInternalButton);
@@ -81,9 +77,6 @@ public class DSPanelBinomialQueue extends DSPanel {
         ButtonGroup group = new ButtonGroup();
         group.add(viewLogicalButton);
         group.add(viewInternalButton);
-
-
-
 
         this.add(box, BorderLayout.NORTH);
         this.add(view = queueView = new DSViewBinomialQueue(), BorderLayout.CENTER);
@@ -112,7 +105,6 @@ public class DSPanelBinomialQueue extends DSPanel {
         viewLogicalButton.setEnabled(true);
     }
 
-    // Persistence, NOT USED!
 
     public void setData(Object data) {
     }

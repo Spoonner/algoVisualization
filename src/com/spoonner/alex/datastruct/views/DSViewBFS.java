@@ -1,10 +1,10 @@
 package com.spoonner.alex.datastruct.views;
 
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -167,7 +167,7 @@ public class DSViewBFS extends DSViewGraphDirected {
 
     protected void bfs(int sv) {
         int queue[] = new int[30];
-        GElementLabel queuelabels[] = new GElementLabel[30];
+        ElementLabel queuelabels[] = new ElementLabel[30];
         int queuetop = 0;
         int i,j;
         int next;
@@ -207,7 +207,7 @@ public class DSViewBFS extends DSViewGraphDirected {
                                     removeAny(edges[next][i]);
                                     int flat = flatness[next][i];
                                     if (flat == 0) flat = -flatness[i][next];
-                                    edges[next][i] = createLink(nodes[next], nodes[i], GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+                                    edges[next][i] = createLink(nodes[next], nodes[i], Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                                                                 "", flat);
                                     setEdgeColor(next, i, Color.BLUE);
                                     edges[i][next] = edges[next][i];
@@ -231,7 +231,7 @@ public class DSViewBFS extends DSViewGraphDirected {
                                     repaintwait();
                                 }
                             } else {
-                               // GElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
+                               // ElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
                                //                               DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
                                // repaintwait();
                                 //removeAny(l);
@@ -254,7 +254,7 @@ public class DSViewBFS extends DSViewGraphDirected {
 
                             repaintwait();
                         } else {
-                            // GElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
+                            // ElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
                              //                             DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
                             // repaintwait();
                             // removeAny(l);
@@ -283,7 +283,7 @@ public class DSViewBFS extends DSViewGraphDirected {
 
     }
 
-    private void moveQueue(GElementLabel[] queuelabels, int queuetop) {
+    private void moveQueue(ElementLabel[] queuelabels, int queuetop) {
         int i,j;
         Vector2D path[][] = new Vector2D[queuetop][];
         for (i=0; i<queuetop;i++)

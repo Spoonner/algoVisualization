@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct.views;
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -36,13 +36,13 @@ public class DSViewCC extends DSViewGraphDirected {
     int parent[] = new int[30];
 
 
-    private GElementLabel dLabels[] = new GElementLabel[30];
-    private GElementLabel fLabels[] = new GElementLabel[30];
+    private ElementLabel dLabels[] = new ElementLabel[30];
+    private ElementLabel fLabels[] = new ElementLabel[30];
 
     private final int WHITE = 0;
     private final int GREY = 1;
     private final int BLACK = 2;
-    private GElement DFSLabels[] = new GElement[200];
+    private Element DFSLabels[] = new Element[200];
 
 
     public final static int CC = 8;
@@ -57,7 +57,7 @@ public class DSViewCC extends DSViewGraphDirected {
     private boolean MakeComponents = false;
     private int ComponentNum = -1;
 
-    protected GElement HighlightCircle;
+    protected Element HighlightCircle;
 
 
     public DSViewCC() {
@@ -143,12 +143,12 @@ public class DSViewCC extends DSViewGraphDirected {
 
     private void ConnectedComponents() {
         int i,j,min;
-        GElementLabel tmplabel;
+        ElementLabel tmplabel;
         int tmpint;
         MakeComponents = false;
        dfs();
 
-        GElementLabel orderLabels[] = new GElementLabel[size];
+        ElementLabel orderLabels[] = new ElementLabel[size];
         int Order[] = new int[size];
 
        for (i = 0; i < labelindex; i++)
@@ -163,7 +163,7 @@ public class DSViewCC extends DSViewGraphDirected {
         repaintwait();
         removeDFLabels();
 
-        GElement msg = createLabel("Transposing Graph ...",100,10);
+        Element msg = createLabel("Transposing Graph ...",100,10);
         msg.setLabelColor(Color.BLUE);
         repaintwait();
         transpose();
@@ -206,7 +206,7 @@ public class DSViewCC extends DSViewGraphDirected {
 
           }
         orderLabels[0].setLabelColor(Color.RED);
-        DFSLabels[labelindex] = (GElement) createLabel("CC #1",CC_LABEL_X_OFFSET,DFS_INITIAL_Y);
+        DFSLabels[labelindex] = (Element) createLabel("CC #1",CC_LABEL_X_OFFSET,DFS_INITIAL_Y);
         DFSLabels[labelindex].setLabelColor(Color.BLUE);
         labelindex++;
         ComponentNum = 1;
@@ -222,12 +222,12 @@ public class DSViewCC extends DSViewGraphDirected {
           for (i = 1; i < size; i++) {
               if (VertexColor[Order[i]] == WHITE) {
                   orderLabels[i].setLabelColor(Color.RED);
-                  DFSLabels[labelindex] = (GElement) createRectangle("", DFS_INITIAL_X + 150, DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct - 2, 300, 1);
+                  DFSLabels[labelindex] = (Element) createRectangle("", DFS_INITIAL_X + 150, DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct - 2, 300, 1);
                   DFSLabels[labelindex].setColor(Color.BLUE);
                   DFS_yoffset_correct += 4;
                   labelindex++;
                   ComponentNum++;
-                  DFSLabels[labelindex] = (GElement) createLabel("CC #"+ComponentNum,CC_LABEL_X_OFFSET,DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
+                  DFSLabels[labelindex] = (Element) createLabel("CC #"+ComponentNum,CC_LABEL_X_OFFSET,DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
                     DFSLabels[labelindex].setLabelColor(Color.BLUE);
                   yoffset+= 1;
                   labelindex++;
@@ -246,7 +246,7 @@ public class DSViewCC extends DSViewGraphDirected {
       }
 
 
-      private void moveList(GElementLabel[] queuelabels, int queuetop) {
+      private void moveList(ElementLabel[] queuelabels, int queuetop) {
         int i,j;
         Vector2D path[][] = new Vector2D[queuetop][];
         for (i=0; i<queuetop;i++)
@@ -478,7 +478,7 @@ public class DSViewCC extends DSViewGraphDirected {
         DFS(0, 0);
         for (i = 1; i < size; i++) {
             if (VertexColor[i] == WHITE) {
-                DFSLabels[labelindex] = (GElement) createRectangle("", DFS_INITIAL_X + 100, DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct - 3, 200, 1);
+                DFSLabels[labelindex] = (Element) createRectangle("", DFS_INITIAL_X + 100, DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct - 3, 200, 1);
                 DFSLabels[labelindex].setColor(Color.BLUE);
                 DFS_yoffset_correct += 5;
                 labelindex++;
@@ -529,7 +529,7 @@ public class DSViewCC extends DSViewGraphDirected {
                                removeAny(edges[startvertex][i]);
                                 int flat = flatness[startvertex][i];
                                 if (flat ==0) flat = -flatness[i][startvertex];
-                               edges[startvertex][i] = createLink(nodes[startvertex],nodes[i], GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+                               edges[startvertex][i] = createLink(nodes[startvertex],nodes[i], Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                                                      "", flat);
                                setEdgeColor(startvertex,i,Color.BLUE);
                                 edges[i][startvertex] = edges[startvertex][i];
@@ -550,7 +550,7 @@ public class DSViewCC extends DSViewGraphDirected {
                                 repaintwait();
                             }
                         } else {
-                            GElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
+                            ElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
                                                           DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
                             repaintwait();
                             removeAny(l);
@@ -573,7 +573,7 @@ public class DSViewCC extends DSViewGraphDirected {
                         setVertexColor(startvertex, Color.RED);
                         repaintwait();
                     } else {
-                        GElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
+                        ElementLabel l = createLabel("Vertex " + i + " already visited", DFS_INITIAL_X + xoffset * DFS_DELTA_X + 75,
                                                       DFS_INITIAL_Y + yoffset * DFS_DELTA_Y + DFS_yoffset_correct);
                         repaintwait();
                         removeAny(l);

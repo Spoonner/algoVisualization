@@ -1,9 +1,9 @@
 package com.spoonner.alex.datastruct.views;
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -25,11 +25,11 @@ public class DSViewAVLTree extends DSView {
     protected int widthdelta = 60;
     protected int heightdelta = 50;
     protected final int MOVESTEPS = 40;
-    protected GElement elementLabel;
-    protected GLink rotateLink1;
-    protected GLink rotateLink2;
+    protected Element elementLabel;
+    protected Link rotateLink1;
+    protected Link rotateLink2;
 
-    protected GElementLabel rotatelabel = null;
+    protected ElementLabel rotatelabel = null;
 
     protected boolean showHeight = true;
 
@@ -154,7 +154,7 @@ public class DSViewAVLTree extends DSView {
             }
             insertElem.isLeftChild = leftchild;
             insertElem.parent = parent;
-            createLink(parent.display, insertElem.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", offsetsign);
+            createLink(parent.display, insertElem.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", offsetsign);
             if (leftchild && parent != null) {
                 parent.left = insertElem;
             } else if (parent != null) {
@@ -223,18 +223,18 @@ public class DSViewAVLTree extends DSView {
         rotatelabel.setLabelColor(Color.BLACK);
         if (t2 != null) {
             removeLink(B.display, t2.display);
-            createLink(A.display, t2.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+            createLink(A.display, t2.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
             t2.isLeftChild = false;
             t2.parent = A;
         }
         removeLink(A.display, B.display);
         if (parent != null)
             removeLink(parent.display, A.display);
-        rotateLink1 = createLink(B.display, A.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+        rotateLink1 = createLink(B.display, A.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
         rotateLink1.setColor(Color.RED);
         B.isLeftChild = true;
         if (parent != null) {
-            createLink(parent.display, B.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", direction);
+            createLink(parent.display, B.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", direction);
         }
         B.left = A;
         A.parent = B;
@@ -277,7 +277,7 @@ public class DSViewAVLTree extends DSView {
 
         if (t2 != null) {
             removeLink(A.display, t2.display);
-            createLink(B.display, t2.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+            createLink(B.display, t2.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
             t2.isLeftChild = true;
             t2.parent = B;
         }
@@ -288,13 +288,13 @@ public class DSViewAVLTree extends DSView {
             removeLink(parent.display, B.display);
 
         if (parent != null) {
-            createLink(parent.display, A.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", direction);
+            createLink(parent.display, A.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", direction);
         }
         A.isLeftChild = leftchild;
         A.parent = parent;
 
 
-        rotateLink1 = createLink(A.display, B.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+        rotateLink1 = createLink(A.display, B.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
         rotateLink1.setColor(Color.RED);
         A.right = B;
         B.parent = A;
@@ -337,7 +337,7 @@ public class DSViewAVLTree extends DSView {
 
         if (t2 != null) {
             removeLink(B.display, t2.display);
-            createLink(A.display, t2.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+            createLink(A.display, t2.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
             t2.isLeftChild = false;
             t2.parent = A;
         }
@@ -345,7 +345,7 @@ public class DSViewAVLTree extends DSView {
 
         if (t3 != null) {
             removeLink(B.display, t3.display);
-            createLink(C.display, t3.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+            createLink(C.display, t3.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
             t3.isLeftChild = true;
             t3.parent = C;
         }
@@ -354,13 +354,13 @@ public class DSViewAVLTree extends DSView {
         removeLink(A.display, C.display);
         removeLink(C.display, B.display);
 
-        rotateLink1 = createLink(B.display, A.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+        rotateLink1 = createLink(B.display, A.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
         rotateLink1.setColor(Color.RED);
         A.parent = B;
         A.isLeftChild = true;
         B.left = A;
 
-        rotateLink2 = createLink(B.display, C.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+        rotateLink2 = createLink(B.display, C.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
         rotateLink2.setColor(Color.RED);
         C.parent = B;
         C.isLeftChild = false;
@@ -368,7 +368,7 @@ public class DSViewAVLTree extends DSView {
 
         if (parent != null) {
             removeLink(parent.display, A.display);
-            createLink(parent.display, B.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", direction);
+            createLink(parent.display, B.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", direction);
         }
         B.parent = parent;
         B.isLeftChild = leftchild;
@@ -412,7 +412,7 @@ public class DSViewAVLTree extends DSView {
 
         if (t2 != null) {
             removeLink(B.display, t2.display);
-            createLink(A.display, t2.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+            createLink(A.display, t2.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
             t2.isLeftChild = false;
             t2.parent = A;
         }
@@ -420,7 +420,7 @@ public class DSViewAVLTree extends DSView {
 
         if (t3 != null) {
             removeLink(B.display, t3.display);
-            createLink(C.display, t3.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+            createLink(C.display, t3.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
             t3.isLeftChild = true;
             t3.parent = C;
         }
@@ -429,13 +429,13 @@ public class DSViewAVLTree extends DSView {
         removeLink(C.display, A.display);
         removeLink(A.display, B.display);
 
-        rotateLink1 = createLink(B.display, A.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+        rotateLink1 = createLink(B.display, A.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
         rotateLink1.setColor(Color.RED);
         A.parent = B;
         A.isLeftChild = true;
         B.left = A;
 
-        rotateLink2 = createLink(B.display, C.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+        rotateLink2 = createLink(B.display, C.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
         rotateLink2.setColor(Color.RED);
         C.parent = B;
         C.isLeftChild = false;
@@ -443,7 +443,7 @@ public class DSViewAVLTree extends DSView {
 
         if (parent != null) {
             removeLink(parent.display, C.display);
-            createLink(parent.display, B.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", direction);
+            createLink(parent.display, B.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", direction);
         }
         B.parent = parent;
         B.isLeftChild = leftchild;
@@ -568,7 +568,7 @@ public class DSViewAVLTree extends DSView {
 
 
     public void delete(String removeitem) {
-        GElement Deletelabel = createLabel("Deleting:", 100, 40, false);
+        Element Deletelabel = createLabel("Deleting:", 100, 40, false);
         elementLabel = createLabel(String.valueOf(removeitem), 170, 40, false);
         elementLabel.setLabelColor(Color.RED);
         root = delete(removeitem, root);
@@ -607,10 +607,10 @@ public class DSViewAVLTree extends DSView {
                     if (tree.parent != null) {
                         removeLink(tree.parent.display, tree.display);
                         if (isLeftChild) {
-                            createLink(tree.parent.display, tree.right.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+                            createLink(tree.parent.display, tree.right.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
                             tree.right.isLeftChild = true;
                         } else {
-                            createLink(tree.parent.display, tree.right.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+                            createLink(tree.parent.display, tree.right.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
                             tree.right.isLeftChild = false;
                         }
                         repaintwait();
@@ -633,10 +633,10 @@ public class DSViewAVLTree extends DSView {
                     if (tree.parent != null) {
                         removeLink(tree.parent.display, tree.display);
                         if (isLeftChild) {
-                            createLink(tree.parent.display, tree.left.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -1);
+                            createLink(tree.parent.display, tree.left.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -1);
                             tree.left.isLeftChild = true;
                         } else {
-                            createLink(tree.parent.display, tree.left.display, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 1);
+                            createLink(tree.parent.display, tree.left.display, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 1);
                             tree.left.isLeftChild = false;
                         }
                         repaintwait();
@@ -665,7 +665,7 @@ public class DSViewAVLTree extends DSView {
                     }
                     tree.display.setLabel("");
                     elementLabel.setLabelColor(Color.BLACK);
-                    GElement label = createLabel(tmp.display.getLabel(), tmp.display.getPositionX(), tmp.display.getPositionY(), false);
+                    Element label = createLabel(tmp.display.getLabel(), tmp.display.getPositionX(), tmp.display.getPositionY(), false);
                     Vector2D path[] = createPath(label.getPosition(), tree.display.getPosition(), MOVESTEPS);
                     for (int i = 0; i < MOVESTEPS; i++) {
                         label.setPosition(path[i]);
@@ -778,10 +778,10 @@ public class DSViewAVLTree extends DSView {
 
 
     public void find(String finditem) {
-        GElement findlabel = createLabel("Finding:", 100, 40, false);
+        Element findlabel = createLabel("Finding:", 100, 40, false);
         elementLabel = createLabel(String.valueOf(finditem), 170, 40, false);
         elementLabel.setLabelColor(Color.RED);
-        GElement found = find(finditem, root);
+        Element found = find(finditem, root);
         if (found != null) {
             findlabel.setLabel("Found:");
             repaintwait();
@@ -797,7 +797,7 @@ public class DSViewAVLTree extends DSView {
 
     }
 
-    public GElement find(String finditem, AVLNode tree) {
+    public Element find(String finditem, AVLNode tree) {
         if (tree == null)
             return null;
         tree.display.setLabelColor(Color.RED);
@@ -824,8 +824,8 @@ public class DSViewAVLTree extends DSView {
         AVLNode left;
         AVLNode right;
         AVLNode parent;
-        GElement display;
-        GElementLabel HeightLabel;
+        Element display;
+        ElementLabel HeightLabel;
         boolean isLeftChild = true;
 
         int height;
@@ -844,7 +844,7 @@ public class DSViewAVLTree extends DSView {
             newY = -1;
         }
 
-        public AVLNode(String elem, GElement disp, int newHeight) {
+        public AVLNode(String elem, Element disp, int newHeight) {
             data = elem;
             left = null;
             right = null;

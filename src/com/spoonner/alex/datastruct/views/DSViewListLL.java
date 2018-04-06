@@ -1,12 +1,11 @@
 package com.spoonner.alex.datastruct.views;
 
 
+import com.spoonner.alex.appkit.core.gview.object.*;
 import com.spoonner.alex.datastruct.shapes.DSShapeSingleLLR;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementArrow;
 
 import java.awt.*;
 
@@ -30,8 +29,8 @@ public class DSViewListLL extends DSView {
 
 
     protected int current[];
-    protected GElementArrow currentarrow[];
-    protected GElementLabel currentlabel[];
+    protected ElementArrow currentarrow[];
+    protected ElementLabel currentlabel[];
     public final int MAXLIST = 19;
     public final int NUMSTEPS = 25;
     protected int numiterator;
@@ -41,11 +40,11 @@ public class DSViewListLL extends DSView {
     protected int LinkedListElemHeight = 50;
     protected int LinkedListElemWidth = 75;
 
-    protected GElementArrow headarrow;
-    protected GElementLabel headlabel;
-    protected GElementArrow tailarrow;
-    protected GElementLabel taillabel;
-    protected GElementLabel lengthlabel;
+    protected ElementArrow headarrow;
+    protected ElementLabel headlabel;
+    protected ElementArrow tailarrow;
+    protected ElementLabel taillabel;
+    protected ElementLabel lengthlabel;
 
     protected DSShapeSingleLLR list[];
 
@@ -55,8 +54,8 @@ public class DSViewListLL extends DSView {
         int i;
 
         current = new int[2];
-        currentarrow = new GElementArrow[2];
-        currentlabel = new GElementLabel[2];
+        currentarrow = new ElementArrow[2];
+        currentlabel = new ElementLabel[2];
 
         current[0] = -1;
         current[1] = -1;
@@ -258,7 +257,7 @@ public class DSViewListLL extends DSView {
             list[length].setPointerVoid(true);
             repaintwait();
             list[length - 1].setPointerVoid(false);
-            createLink(list[length - 1], list[length], GLink.SHAPE_ELBOW, GElement.ANCHOR_RIGHT, GElement.ANCHOR_LEFT, "", 0);
+            createLink(list[length - 1], list[length], Link.SHAPE_ELBOW, Element.ANCHOR_RIGHT, Element.ANCHOR_LEFT, "", 0);
             repaintwait();
 
 
@@ -276,7 +275,7 @@ public class DSViewListLL extends DSView {
             }
             lengthlabel.setLabel(String.valueOf(length));
         } else {
-            GElementLabel error = createLabel("Graphic display of List is full (linked lists, of course, do not get full in this way)", 400, 20);
+            ElementLabel error = createLabel("Graphic display of List is full (linked lists, of course, do not get full in this way)", 400, 20);
             HoldoverGraphics.add(error);
 
         }
@@ -323,7 +322,7 @@ public class DSViewListLL extends DSView {
         int otheritr = 1 - itr;
 
         if ((current[itr] < 0) || (current[itr] >= length)) {
-            GElementLabel l = createLabel("Iterator not in the list:  Delete not valid", 200, 20);
+            ElementLabel l = createLabel("Iterator not in the list:  Delete not valid", 200, 20);
             l.setLabelColor(iteratorColors[itr]);
             HoldoverGraphics.add(l);
         } else {
@@ -332,7 +331,7 @@ public class DSViewListLL extends DSView {
             if (current[itr] == length - 1) {
                 list[current[itr]].setPointerVoid(true);
             } else {
-                createLink(list[current[itr]], list[current[itr] + 2], GLink.SHAPE_ELBOW, GElement.ANCHOR_RIGHT, GElement.ANCHOR_LEFT, "", 0);
+                createLink(list[current[itr]], list[current[itr] + 2], Link.SHAPE_ELBOW, Element.ANCHOR_RIGHT, Element.ANCHOR_LEFT, "", 0);
             }
             repaintwait();
             if (current[itr] != length - 1) {
@@ -359,7 +358,7 @@ public class DSViewListLL extends DSView {
     }
 
     private void inlist(int itr) {
-        GElementLabel l;
+        ElementLabel l;
         if (current[itr] >= 0 && current[itr] < length)
             l = createLabel("Iterator is in the list", 200, 20);
         else
@@ -372,13 +371,13 @@ public class DSViewListLL extends DSView {
     private void current(int itr) {
         int j;
         if ((current[itr] < 0) || (current[itr] >= length)) {
-            GElementLabel l = createLabel("Iterator not in the list:  Current not valid", 200, 20);
+            ElementLabel l = createLabel("Iterator not in the list:  Current not valid", 200, 20);
             l.setLabelColor(iteratorColors[itr]);
             HoldoverGraphics.add(l);
         } else {
-            GElementLabel l = createLabel("Current Element: ", 200, 20);
+            ElementLabel l = createLabel("Current Element: ", 200, 20);
             l.setLabelColor(iteratorColors[itr]);
-            GElementLabel eleml = createLabel(list[current[itr] + 1].getLabel(),
+            ElementLabel eleml = createLabel(list[current[itr] + 1].getLabel(),
                                               list[current[itr] + 1].getPositionX(),
                                               list[current[itr] + 1].getPositionY());
             Vector2D[] path = createPath(eleml.getPosition(),
@@ -387,7 +386,7 @@ public class DSViewListLL extends DSView {
                 eleml.setPosition(path[j]);
                 repaintwaitmin();
             }
-            GElement lst[] = {l,eleml};
+            Element lst[] = {l,eleml};
             LineupHorizontal(lst);
             HoldoverGraphics.add(l);
             HoldoverGraphics.add(eleml);
@@ -400,7 +399,7 @@ public class DSViewListLL extends DSView {
 
         int j;
         if ((current[itr] < 0) || (current[itr] >= length)) {
-            GElement l = createLabel("Iterator is not in the list, cannot advance", 200, 20);
+            Element l = createLabel("Iterator is not in the list, cannot advance", 200, 20);
             l.setLabelColor(iteratorColors[itr]);
             HoldoverGraphics.add(l);
         } else {
@@ -466,8 +465,8 @@ public class DSViewListLL extends DSView {
     private void length() {
         int j;
         Vector2D[] path;
-        GElementLabel l2 = createLabel(lengthlabel.getLabel(), lengthlabel.getPositionX(), lengthlabel.getPositionY());
-        GElementLabel l = createLabel("Length = ", 100, 10);
+        ElementLabel l2 = createLabel(lengthlabel.getLabel(), lengthlabel.getPositionX(), lengthlabel.getPositionY());
+        ElementLabel l = createLabel("Length = ", 100, 10);
 
         path = createPath(l2.getPosition(), new Vector2D(135, 10), NUMSTEPS);
         for (j = 0; j < path.length; j++) {
@@ -485,13 +484,13 @@ public class DSViewListLL extends DSView {
 
 
         if (index < 0 || index >= length) {
-            GElementLabel l = createLabel("Can't set Current to " + index, 200, 20);
+            ElementLabel l = createLabel("Can't set Current to " + index, 200, 20);
             l.setLabelColor(iteratorColors[itr]);
             HoldoverGraphics.add(l);
 
 
         } else {
-            GElementLabel l = createLabel("Setting Current to " + index, 200, 20);
+            ElementLabel l = createLabel("Setting Current to " + index, 200, 20);
             l.setLabelColor(iteratorColors[itr]);
 
             for (current[itr] = 0; current[itr] <= index; current[itr]++) {
@@ -517,7 +516,7 @@ public class DSViewListLL extends DSView {
         int i, j;
 
         for (i = length - 1; i >= firstmove; i--) {
-            GElement l = createLabel(list[i].getLabel(), 50 + i * 50, 250, false);
+            Element l = createLabel(list[i].getLabel(), 50 + i * 50, 250, false);
             list[i].setLabel("");
             for (j = 0; j < NUMSTEPS; j++) {
                 l.move(50 / NUMSTEPS, 0);
@@ -565,10 +564,10 @@ public class DSViewListLL extends DSView {
             list[current[itr] + 1].setPointerVoid(true);
             repaintwait();
             list[current[itr] + 1].setPointerVoid(false);
-            createLink(list[current[itr] + 1], list[current[itr] + 2], GLink.SHAPE_ELBOW, GElement.ANCHOR_RIGHT, GElement.ANCHOR_LEFT, "", 0);
+            createLink(list[current[itr] + 1], list[current[itr] + 2], Link.SHAPE_ELBOW, Element.ANCHOR_RIGHT, Element.ANCHOR_LEFT, "", 0);
             repaintwait();
             removeLink(list[current[itr]], list[current[itr] + 2]);
-            createLink(list[current[itr]], list[current[itr] + 1], GLink.SHAPE_ELBOW, GElement.ANCHOR_RIGHT, GElement.ANCHOR_LEFT, "", 0);
+            createLink(list[current[itr]], list[current[itr] + 1], Link.SHAPE_ELBOW, Element.ANCHOR_RIGHT, Element.ANCHOR_LEFT, "", 0);
             repaintwait();
             UpdateList(1 - itr);
             current[itr]++;
@@ -584,11 +583,11 @@ public class DSViewListLL extends DSView {
 
 
         } else if (length == MAXLIST) {
-            GElementLabel error = createLabel("Graphic display of List is full (linked lists, of course, do not get full in this way)", 400, 20);
+            ElementLabel error = createLabel("Graphic display of List is full (linked lists, of course, do not get full in this way)", 400, 20);
             error.setLabelColor(iteratorColors[itr]);
             HoldoverGraphics.add(error);
         } else {
-            GElementLabel l = createLabel("Iterator not in the list, cannot insert", 200, 10);
+            ElementLabel l = createLabel("Iterator not in the list, cannot insert", 200, 10);
             l.setLabelColor(iteratorColors[itr]);
             HoldoverGraphics.add(l);
         }

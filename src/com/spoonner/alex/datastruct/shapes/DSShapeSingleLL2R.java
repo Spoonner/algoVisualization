@@ -1,7 +1,7 @@
 package com.spoonner.alex.datastruct.shapes;
 
 
-import com.spoonner.alex.appkit.appkit.gview.shape.SLabel;
+import com.spoonner.alex.appkit.core.gview.shape.LabelShape;
 import com.spoonner.alex.appkit.misc.XMLSerializable;
 
 import java.awt.*;
@@ -62,11 +62,11 @@ public class DSShapeSingleLL2R extends DSShapeRect implements XMLSerializable {
         Rectangle r = getFrame().rectangle();
         g.setColor(labelColor);
 
-        SLabel.drawCenteredString(label, (int)(getPositionX()-r.width*percentlink/2 -
+        LabelShape.drawCenteredString(label, (int)(getPositionX()-r.width*percentlink/2 -
                                               r.width*(1-percentlink)/4), (int)getPositionY(), g);
         g.setColor(label2Color);
 
-        SLabel.drawCenteredString(label2, (int)(getPositionX()-r.width*percentlink/2 +
+        LabelShape.drawCenteredString(label2, (int)(getPositionX()-r.width*percentlink/2 +
                                               r.width*(1-percentlink)/4), (int)getPositionY(), g);
     }
 

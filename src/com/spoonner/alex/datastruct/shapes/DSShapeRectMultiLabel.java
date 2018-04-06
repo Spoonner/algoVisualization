@@ -1,13 +1,13 @@
 package com.spoonner.alex.datastruct.shapes;
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementRect;
-import com.spoonner.alex.appkit.appkit.gview.shape.SLabel;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.ElementRect;
+import com.spoonner.alex.appkit.core.gview.shape.LabelShape;
 import com.spoonner.alex.appkit.misc.XMLSerializable;
 
 import java.awt.*;
 
-public class DSShapeRectMultiLabel extends GElementRect implements XMLSerializable {
+public class DSShapeRectMultiLabel extends ElementRect implements XMLSerializable {
 
     protected String Labels[];
     protected Color LabelColors[];
@@ -119,7 +119,7 @@ public class DSShapeRectMultiLabel extends GElementRect implements XMLSerializab
 
         for (i=0; i<numLabels;i++) {
             g.setColor(LabelColors[i]);
-            SLabel.drawCenteredString(Labels[i], (int) (leftedge + labelWidth/2 + i * labelWidth), (int)getPositionY(), g);
+            LabelShape.drawCenteredString(Labels[i], (int) (leftedge + labelWidth/2 + i * labelWidth), (int)getPositionY(), g);
         }
 
     }

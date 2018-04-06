@@ -1,6 +1,6 @@
 package com.spoonner.alex.datastruct.shapes;
 
-import com.spoonner.alex.appkit.appkit.gview.shape.SLabel;
+import com.spoonner.alex.appkit.core.gview.shape.LabelShape;
 import com.spoonner.alex.appkit.misc.XMLSerializable;
 
 import java.awt.*;
@@ -50,15 +50,15 @@ public class DSShapeSingleLLU extends DSShapeRect implements XMLSerializable {
         strheight = fm.getStringBounds(label,g).getHeight();
         if (strwidth > width) {
             Rectangle r = getFrame().rectangle();
-            SLabel.drawCenteredString(label.substring(0,label.length()/2), getPositionX(),
+            LabelShape.drawCenteredString(label.substring(0,label.length()/2), getPositionX(),
                                       (int)(getPositionY()+r.height*percentlink/2)  -strheight/2-1, g);
-            SLabel.drawCenteredString(label.substring(label.length()/2,label.length()), getPositionX(),
+            LabelShape.drawCenteredString(label.substring(label.length()/2,label.length()), getPositionX(),
                                       (int)(getPositionY()+r.height*percentlink/2) + strheight/2, g);
 
         }   else {
 
             Rectangle r = getFrame().rectangle();
-            SLabel.drawCenteredString(label, getPositionX(), (int)(getPositionY()+r.height*percentlink/2), g);
+            LabelShape.drawCenteredString(label, getPositionX(), (int)(getPositionY()+r.height*percentlink/2), g);
         }
     }
 

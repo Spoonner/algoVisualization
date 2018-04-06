@@ -1,8 +1,8 @@
 package com.spoonner.alex.datastruct.views;
 
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -80,15 +80,15 @@ public class DSViewHeap extends DSView {
 
 
     private void setLabel(int index, String label) {
-        GElement treenode = (GElement) shapes.get(index + 32);
-        GElement arraynode = (GElement) shapes.get(index + 1);
+        Element treenode = (Element) shapes.get(index + 32);
+        Element arraynode = (Element) shapes.get(index + 1);
         treenode.setLabel(label);
         arraynode.setLabel(label);
     }
 
     private void setColor(int index, Color clr) {
-        GElement treenode = (GElement) shapes.get(index + 32);
-        GElement arraynode = (GElement) shapes.get(index + 1);
+        Element treenode = (Element) shapes.get(index + 32);
+        Element arraynode = (Element) shapes.get(index + 1);
         treenode.setLabelColor(clr);
         arraynode.setLabelColor(clr);
     }
@@ -105,9 +105,9 @@ public class DSViewHeap extends DSView {
         setLabel(size, String.valueOf(HeapData[size]));
         if (size != 0) {
             if (size % 2 == 0) {
-                createLink((size - 1) / 2 + 32, size + 32, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 15);
+                createLink((size - 1) / 2 + 32, size + 32, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 15);
             } else {
-                createLink((size - 1) / 2 + 32, size + 32, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -15);
+                createLink((size - 1) / 2 + 32, size + 32, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -15);
             }
         }
         repaintwait();
@@ -126,9 +126,9 @@ public class DSViewHeap extends DSView {
         if (size > 0) {
             size = size - 1;
 
-            Vector2D startPos = ((GElement) shapes.get(32)).getPosition();
-            GElement Removed = createLabel(String.valueOf(HeapData[0]), startPos.getX(), startPos.getY(),false);
-            GElement RemLab = createLabel("Element Removed:", 100,100 , false);
+            Vector2D startPos = ((Element) shapes.get(32)).getPosition();
+            Element Removed = createLabel(String.valueOf(HeapData[0]), startPos.getX(), startPos.getY(),false);
+            Element RemLab = createLabel("Element Removed:", 100,100 , false);
             Vector2D path[] = createPath(startPos, new Vector2D(170, 100), 40);
             setLabel(0, "");            
             for (int i=0; i<40; i++) {
@@ -198,10 +198,10 @@ public class DSViewHeap extends DSView {
         int pathlength = 40;
         int i;
 
-        Vector2D array1 = ((GElement) shapes.get(index1 + 1)).getPosition();
-        Vector2D array2 = ((GElement) shapes.get(index2 + 1)).getPosition();
-        Vector2D tree1 = ((GElement) shapes.get(index1 + 32)).getPosition();
-        Vector2D tree2 = ((GElement) shapes.get(index2 + 32)).getPosition();
+        Vector2D array1 = ((Element) shapes.get(index1 + 1)).getPosition();
+        Vector2D array2 = ((Element) shapes.get(index2 + 1)).getPosition();
+        Vector2D tree1 = ((Element) shapes.get(index1 + 32)).getPosition();
+        Vector2D tree2 = ((Element) shapes.get(index2 + 32)).getPosition();
         Vector2D treepath1[] = createPath(tree1, tree2, pathlength);
         Vector2D treepath2[] = createPath(tree2, tree1, pathlength);
         Vector2D arraypath1[] = createPath(array1, array2, pathlength);
@@ -209,16 +209,16 @@ public class DSViewHeap extends DSView {
 
 
 
-        String Label1 = ((GElement) shapes.get(index1 + 1)).getLabel();
-        String Label2 = ((GElement) shapes.get(index2 + 1)).getLabel();
+        String Label1 = ((Element) shapes.get(index1 + 1)).getLabel();
+        String Label2 = ((Element) shapes.get(index2 + 1)).getLabel();
         setLabel(index1, "");
         setLabel(index2, "");
 
 
-        GElement ArrayLabel1 = createLabel(Label1, array1.getX(), array1.getY(), false);
-        GElement ArrayLabel2 = createLabel(Label2, array2.getX(), array2.getY(), false);
-        GElement TreeLabel1 = createLabel(Label1, tree1.getX(), tree1.getY(), false);
-        GElement TreeLabel2 = createLabel(Label2, tree2.getX(), tree2.getY(), false);
+        Element ArrayLabel1 = createLabel(Label1, array1.getX(), array1.getY(), false);
+        Element ArrayLabel2 = createLabel(Label2, array2.getX(), array2.getY(), false);
+        Element TreeLabel1 = createLabel(Label1, tree1.getX(), tree1.getY(), false);
+        Element TreeLabel2 = createLabel(Label2, tree2.getX(), tree2.getY(), false);
 
         for (i = 0; i < pathlength; i++) {
             TreeLabel1.setPosition(treepath1[i]);
@@ -294,9 +294,9 @@ public class DSViewHeap extends DSView {
             setLabel(i, String.valueOf(HeapData[i]));
             if (i != 0) {
                 if (i % 2 == 0) {
-                    createLink((i - 1) / 2 + 32, i + 32, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 15);
+                    createLink((i - 1) / 2 + 32, i + 32, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 15);
                 } else {
-                    createLink((i - 1) / 2 + 32, i + 32, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", -15);
+                    createLink((i - 1) / 2 + 32, i + 32, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", -15);
                 }
             }
         }

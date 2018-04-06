@@ -1,8 +1,8 @@
 package com.spoonner.alex.datastruct.views;
 
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.ElementLabel;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
@@ -75,18 +75,18 @@ public class DSViewFloyd extends DSViewGraph {
     public int D_path_initial_y = D_SMALL_PATH_INITIAL_Y;
 
 
-    protected GElement[] VertexBox;
-    protected GElement[] KnownBox;
-    protected GElement[] CostBox;
-    protected GElement[] PathBox;
+    protected Element[] VertexBox;
+    protected Element[] KnownBox;
+    protected Element[] CostBox;
+    protected Element[] PathBox;
     protected int Dcost[];
 
-    protected GElement inode;
-    protected GElement knode;
-    protected GElement jnode;
-    protected GElement ikedge;
-    protected GElement kjedge;
-    protected GElement ijedge;
+    protected Element inode;
+    protected Element knode;
+    protected Element jnode;
+    protected Element ikedge;
+    protected Element kjedge;
+    protected Element ijedge;
 
     public final static int FLOYD = 9;
 
@@ -180,30 +180,30 @@ public class DSViewFloyd extends DSViewGraph {
 
         if (size == LARGESIZE)
             removeOld();
-        GElementLabel DistanceLabel = createLabel("Distance:", D_matrix_initial_x + 50,
+        ElementLabel DistanceLabel = createLabel("Distance:", D_matrix_initial_x + 50,
                                                   D_matrix_initial_y - 20);
-        GElementLabel PathLabel = createLabel("Path:", D_path_initial_x + 50,
+        ElementLabel PathLabel = createLabel("Path:", D_path_initial_x + 50,
                                               D_path_initial_y - 20);
-        GElementLabel explainString = createLabel("", explain_string_x, explain_string_y);
+        ElementLabel explainString = createLabel("", explain_string_x, explain_string_y);
 
-        GElement Dmatrix[][];
+        Element Dmatrix[][];
         int DMatrixVal[][];
-        GElement Dmatrixindex[][];
+        Element Dmatrixindex[][];
 
-        GElement Dpath[][];
-        GElement Dpathindex[][];
+        Element Dpath[][];
+        Element Dpathindex[][];
 
-        Dmatrix = new GElement[size][];
+        Dmatrix = new Element[size][];
         DMatrixVal = new int[size][];
-        Dmatrixindex = new GElement[size][];
-        Dpath = new GElement[size][];
-        Dpathindex = new GElement[size][];
+        Dmatrixindex = new Element[size][];
+        Dpath = new Element[size][];
+        Dpathindex = new Element[size][];
         for (i = 0; i < size; i++) {
-            Dmatrix[i] = new GElement[size];
-            Dpath[i] = new GElement[size];
-            Dpathindex[i] = new GElement[size];
+            Dmatrix[i] = new Element[size];
+            Dpath[i] = new Element[size];
+            Dpathindex[i] = new Element[size];
             DMatrixVal[i] = new int[size];
-            Dmatrixindex[i] = new GElementLabel[2];
+            Dmatrixindex[i] = new ElementLabel[2];
         }
 
         for (i = 0; i < size; i++) {
@@ -239,15 +239,15 @@ public class DSViewFloyd extends DSViewGraph {
         inode = createCircle("i", node_i_x, node_i_y);
         jnode = createCircle("j", node_j_x, node_j_y);
         knode = createCircle("k", node_k_x, node_k_y);
-        ikedge = createLink(inode, knode, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+        ikedge = createLink(inode, knode, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                             "", 10);
-        kjedge = createLink(knode, jnode, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+        kjedge = createLink(knode, jnode, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                             "", 10);
         if (size==LARGESIZE)
-            ijedge = createLink(inode, jnode, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+            ijedge = createLink(inode, jnode, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                             "", -1);
         else
-            ijedge = createLink(inode, jnode, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER,
+            ijedge = createLink(inode, jnode, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER,
                             "", 10);
 
         for (k = 0; k < size; k++) {
@@ -277,9 +277,9 @@ public class DSViewFloyd extends DSViewGraph {
                                                Dmatrix[i][j].getLabel());
                         repaintwait();
 
-                        GElementLabel costlabel = createLabel(Integer.toString(DMatrixVal[i][k] + DMatrixVal[k][j]),
+                        ElementLabel costlabel = createLabel(Integer.toString(DMatrixVal[i][k] + DMatrixVal[k][j]),
                                                               explainString.getPosition());
-                        GElementLabel nodeLabel = createLabel(Dpath[k][j].getLabel(), Dpath[k][j].getPosition());
+                        ElementLabel nodeLabel = createLabel(Dpath[k][j].getLabel(), Dpath[k][j].getPosition());
                         AnimatePath(costlabel, costlabel.getPosition(), Dmatrix[i][j].getPosition(),
                                     nodeLabel, nodeLabel.getPosition(), Dpath[i][j].getPosition(), 30);
                         removeAny(costlabel);

@@ -1,13 +1,12 @@
 package com.spoonner.alex.datastruct.views;
 
 
+import com.spoonner.alex.appkit.core.gview.object.*;
 import com.spoonner.alex.datastruct.shapes.DSShapeNullPointer;
 import com.spoonner.alex.datastruct.shapes.DSShapeSingleLLL;
-import com.spoonner.alex.appkit.appkit.gview.base.Vector2D;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementArrow;
-import com.spoonner.alex.appkit.appkit.gview.object.GElementLabel;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.base.Vector2D;
+import com.spoonner.alex.appkit.core.gview.object.Element;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 public class DSViewQueueLL extends DSView {
 
@@ -17,8 +16,8 @@ public class DSViewQueueLL extends DSView {
     protected final int NUMSTEPS = 40;
     protected final int QUEUESIZE = 28;
     protected int size;
-    protected GElementArrow tailarrow, headarrow;
-    protected GElementLabel taillabel,headlabel;
+    protected ElementArrow tailarrow, headarrow;
+    protected ElementLabel taillabel,headlabel;
     protected DSShapeNullPointer nullptrtail, nullptrhead;
     protected DSShapeSingleLLL queue[];
 
@@ -72,8 +71,8 @@ public class DSViewQueueLL extends DSView {
 
     public void enqueue(String value) {
 
-        GElement Enqueuelabel = createLabel("Enqueueing: ", 250, 40, false);
-        GElement Enqueued = null;
+        Element Enqueuelabel = createLabel("Enqueueing: ", 250, 40, false);
+        Element Enqueued = null;
         int i,j;
         Vector2D path[];
         Vector2D path2[];
@@ -82,7 +81,7 @@ public class DSViewQueueLL extends DSView {
 
         if (size < QUEUESIZE) {
             Enqueued = createLabel(value, -10, -10, false);
-            GElement list[] = {Enqueuelabel, Enqueued };
+            Element list[] = {Enqueuelabel, Enqueued };
             LineupHorizontal(list);
             repaintwait();
             if (size == 0) {
@@ -120,7 +119,7 @@ public class DSViewQueueLL extends DSView {
                 queue[0].setLabel(String.valueOf(value));
                 repaintwait();
                 queue[1].setPointerVoid(false);
-                GLink l = createLink(queue[1], queue[0], GLink.SHAPE_ELBOW, GElement.ANCHOR_LEFT, GElement.ANCHOR_RIGHT, "", 0);
+                Link l = createLink(queue[1], queue[0], Link.SHAPE_ELBOW, Element.ANCHOR_LEFT, Element.ANCHOR_RIGHT, "", 0);
                 // l.setTargetOffset(0, 0);
                 repaintwait();
                 Vector2D oldhead = tailarrow.getTarget();
@@ -176,8 +175,8 @@ public class DSViewQueueLL extends DSView {
 
 
     public void dequeue() {
-        GElement Dequeuelabel = createLabel("Dequeueing: ", 250, 40, false);
-        GElement Dequeued = null;
+        Element Dequeuelabel = createLabel("Dequeueing: ", 250, 40, false);
+        Element Dequeued = null;
           int i;
           Vector2D path[];
           Vector2D path2[];
@@ -191,7 +190,7 @@ public class DSViewQueueLL extends DSView {
                 Dequeued.setPosition(path[i]);
                 repaintwaitmin();
             }
-            GElement lst[] = {Dequeuelabel, Dequeued};
+            Element lst[] = {Dequeuelabel, Dequeued};
             LineupHorizontal(lst);
 
 

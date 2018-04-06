@@ -1,15 +1,15 @@
 package com.spoonner.alex.datastruct.views;
 
 
+import com.spoonner.alex.appkit.core.gview.object.Element;
 import com.spoonner.alex.datastruct.utils.DSAction;
-import com.spoonner.alex.appkit.appkit.gview.object.GElement;
-import com.spoonner.alex.appkit.appkit.gview.object.GLink;
+import com.spoonner.alex.appkit.core.gview.object.Link;
 
 import java.awt.*;
 
 public class DSViewTree extends DSView {
 
-    GLink nl;
+    Link nl;
 
     public DSViewTree() {
         // Create a tree (the root element will be the first node added into this view)
@@ -18,14 +18,14 @@ public class DSViewTree extends DSView {
         createCircle("c", 150, 180);
 
         // Create two kinds of link between node 0-1 and 0-2
-        createLink(0, 1, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "r1", 30);
-        createLink(0, 2, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "r2", -30);
+        createLink(0, 1, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "r1", 30);
+        createLink(0, 2, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "r2", -30);
     }
 
     public void addLeaf() {
-        GElement element = (GElement)shapes.get(shapes.size()-1);
+        Element element = (Element)shapes.get(shapes.size()-1);
         createCircle("newLeaf", element.getPositionX()+50, element.getPositionY()+50);
-        nl = createLink(shapes.size()-2, shapes.size()-1, GLink.SHAPE_ARC, GElement.ANCHOR_CENTER, GElement.ANCHOR_CENTER, "", 30);
+        nl = createLink(shapes.size()-2, shapes.size()-1, Link.SHAPE_ARC, Element.ANCHOR_CENTER, Element.ANCHOR_CENTER, "", 30);
         repaint();
     }
 
@@ -39,7 +39,7 @@ public class DSViewTree extends DSView {
 
     public void renameLabels() {
         performActionOnAllElements(new DSAction() {
-            public void perform(GElement element, int index) {
+            public void perform(Element element, int index) {
                 element.setLabel(String.valueOf((int)(Math.random()*Short.MAX_VALUE)));
             }
         });
@@ -48,7 +48,7 @@ public class DSViewTree extends DSView {
 
     public void colorizeLabels() {
         performActionOnAllElements(new DSAction() {
-            public void perform(GElement element, int index) {
+            public void perform(Element element, int index) {
                 element.setLabelColor(new Color((int) (Math.random()*Integer.MAX_VALUE)));
             }
         });
@@ -57,7 +57,7 @@ public class DSViewTree extends DSView {
 
     public void toggleLabelsVisibility() {
         performActionOnAllElements(new DSAction() {
-            public void perform(GElement element, int index) {
+            public void perform(Element element, int index) {
                 element.setLabelVisible(!element.isLabelVisible());
             }
         });
