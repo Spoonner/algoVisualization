@@ -33,8 +33,8 @@ package com.spoonner.alex.appkit.core.document;
 
 import com.spoonner.alex.appkit.core.app.Application;
 import com.spoonner.alex.appkit.core.frame.AbstractWindow;
-import com.spoonner.alex.appkit.core.utils.XJAlert;
-import com.spoonner.alex.appkit.core.utils.XJFileChooser;
+import com.spoonner.alex.appkit.core.utils.Alert;
+import com.spoonner.alex.appkit.core.utils.FileChooser;
 import com.spoonner.alex.appkit.core.utils.XJLocalizable;
 import com.spoonner.alex.appkit.misc.ObservedObject;
 import com.spoonner.alex.appkit.misc.XJUtils;
@@ -198,18 +198,18 @@ public class Document extends ObservedObject {
             return Application.YES;
 
 
-        int r = XJAlert.displayAlertYESNOCANCEL(getJavaContainer(),
+        int r = Alert.displayAlertYESNOCANCEL(getJavaContainer(),
                                                 XJLocalizable.getXJString("DocLoad"),
                                                 XJLocalizable.getStringFormat("DocSaveChanges",
                                                 documentTitle));
         switch(r) {
-            case XJAlert.YES:
+            case Alert.YES:
                 return performSave(false);
 
-            case XJAlert.NO:
+            case Alert.NO:
                 return Application.YES;
 
-            case XJAlert.CANCEL:
+            case Alert.CANCEL:
                 return Application.NO;
         }
 
@@ -222,7 +222,7 @@ public class Document extends ObservedObject {
             readDocument(documentPath);
         } catch(Exception e) {
             e.printStackTrace();
-            XJAlert.display(getJavaContainer(), XJLocalizable.getXJString("DocError"), XJLocalizable.getXJString("DocLoadError")+" "+e.toString());
+            Alert.display(getJavaContainer(), XJLocalizable.getXJString("DocError"), XJLocalizable.getXJString("DocLoadError")+" "+e.toString());
             return Application.NO;
         }
 
@@ -236,17 +236,17 @@ public class Document extends ObservedObject {
         if(!performLoad_())
             return Application.NO;
 
-        if(!XJFileChooser.shared().displayOpenDialog(getJavaContainer(), documentFileExt, documentFileExtDescription, false))
+        if(!FileChooser.shared().displayOpenDialog(getJavaContainer(), documentFileExt, documentFileExtDescription, false))
             return Application.NO;
 
-        String path = XJFileChooser.shared().getSelectedFilePath();
+        String path = FileChooser.shared().getSelectedFilePath();
         Document document = Application.shared().getDocumentForPath(path);
         if(document != null && document != this) {
-            XJAlert.display(getJavaContainer(), XJLocalizable.getXJString("DocError"), XJLocalizable.getXJString("DocLoadExists"));
+            Alert.display(getJavaContainer(), XJLocalizable.getXJString("DocError"), XJLocalizable.getXJString("DocLoadExists"));
             return Application.NO;
         } else {
             Application.shared().addRecentFile(path);
-            return performLoad(XJFileChooser.shared().getSelectedFilePath());
+            return performLoad(FileChooser.shared().getSelectedFilePath());
         }
     }
 
@@ -254,7 +254,7 @@ public class Document extends ObservedObject {
         try {
             readDocument(documentPath);
         } catch(Exception e) {
-            XJAlert.display(getJavaContainer(), XJLocalizable.getXJString("DocError"), XJLocalizable.getXJString("DocLoadError")+" "+e.toString());
+            Alert.display(getJavaContainer(), XJLocalizable.getXJString("DocError"), XJLocalizable.getXJString("DocLoadError")+" "+e.toString());
             return Application.NO;
         }
         return Application.YES;
@@ -269,10 +269,10 @@ public class Document extends ObservedObject {
 
     public boolean performSave(boolean saveAs) {
         if(documentPath == null || saveAs) {
-            if(!XJFileChooser.shared().displaySaveDialog(getJavaContainer(), documentFileExt, documentFileExtDescription, true))
+            if(!FileChooser.shared().displaySaveDialog(getJavaContainer(), documentFileExt, documentFileExtDescription, true))
                 return Application.NO;
 
-            documentPath = XJFileChooser.shared().getSelectedFilePath();
+            documentPath = FileChooser.shared().getSelectedFilePath();
             Application.shared().addRecentFile(documentPath);
         }
 
@@ -280,7 +280,7 @@ public class Document extends ObservedObject {
             writeDocument(documentPath);
         } catch(Exception e) {
             e.printStackTrace();
-            XJAlert.display(getJavaContainer(), XJLocalizable.getXJString("DocError"), XJLocalizable.getXJString("DocSaveError")+" "+e.toString());
+            Alert.display(getJavaContainer(), XJLocalizable.getXJString("DocError"), XJLocalizable.getXJString("DocSaveError")+" "+e.toString());
             return Application.NO;
         }
 
@@ -296,15 +296,15 @@ public class Document extends ObservedObject {
         if(documentWindow != null)
             documentWindow.bringToFront();
 
-        int r = XJAlert.displayAlertYESNOCANCEL(getJavaContainer(), XJLocalizable.getXJString("DocCloseTitle"), XJLocalizable.getStringFormat("DocCloseMessage", documentTitle));
+        int r = Alert.displayAlertYESNOCANCEL(getJavaContainer(), XJLocalizable.getXJString("DocCloseTitle"), XJLocalizable.getStringFormat("DocCloseMessage", documentTitle));
         switch(r) {
-            case XJAlert.YES:
+            case Alert.YES:
                 return performSave(false);
 
-            case XJAlert.NO:
+            case Alert.NO:
                 return Application.YES;
 
-            case XJAlert.CANCEL:
+            case Alert.CANCEL:
                 return Application.NO;
         }
 

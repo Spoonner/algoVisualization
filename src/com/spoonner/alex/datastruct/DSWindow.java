@@ -6,8 +6,8 @@ import com.spoonner.alex.appkit.core.menu.MainMenuBar;
 import com.spoonner.alex.appkit.core.menu.Menu;
 import com.spoonner.alex.appkit.core.menu.MenuItem;
 import com.spoonner.alex.appkit.core.menu.MenuItemDelegate;
-import com.spoonner.alex.appkit.core.utils.XJAlert;
-import com.spoonner.alex.appkit.core.utils.XJFileChooser;
+import com.spoonner.alex.appkit.core.utils.Alert;
+import com.spoonner.alex.appkit.core.utils.FileChooser;
 import com.spoonner.alex.appkit.misc.XJUtils;
 
 import javax.imageio.ImageIO;
@@ -271,28 +271,28 @@ public class DSWindow extends AbstractWindow implements MenuItemDelegate {
         }
 
         // Save the panel content to disk
-        if(XJFileChooser.shared().displaySaveDialog(this.getJavaContainer(), extensions, extensions, false)) {
-            String file = XJFileChooser.shared().getSelectedFilePath();
+        if(FileChooser.shared().displaySaveDialog(this.getJavaContainer(), extensions, extensions, false)) {
+            String file = FileChooser.shared().getSelectedFilePath();
             try {
                 ImageIO.write(panel.getImage(), file.substring(file.lastIndexOf(".")+1), new File(file));
             } catch (IOException e) {
-                XJAlert.display(this.getJavaContainer(), "Error", "Image \""+file+"\" cannot be saved because:\n"+e);
+                Alert.display(this.getJavaContainer(), "Error", "Image \""+file+"\" cannot be saved because:\n"+e);
             }
         }
     }
 
     public void exportPanelToEPS(DSPanel panel) {
-        if(!XJFileChooser.shared().displaySaveDialog(this.getJavaContainer(), "eps", "EPS file", false))
+        if(!FileChooser.shared().displaySaveDialog(this.getJavaContainer(), "eps", "EPS file", false))
             return;
 
-        String file = XJFileChooser.shared().getSelectedFilePath();
+        String file = FileChooser.shared().getSelectedFilePath();
         if(file == null)
             return;
 
         try {
             XJUtils.writeStringToFile(panel.getEPS(), file);
         } catch (Exception e) {
-            XJAlert.display(this.getJavaContainer(), "Error", "Cannot export to EPS file: "+file+"\nError: "+e);
+            Alert.display(this.getJavaContainer(), "Error", "Cannot export to EPS file: "+file+"\nError: "+e);
         }
     }
 
